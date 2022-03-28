@@ -45,7 +45,7 @@ config :logger, :console,
   metadata: [:request_id, :error]
 
 # Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
+config :phoenix, :json_library, Jsonrs
 
 config :trento, Trento.Commanded,
   event_store: [
@@ -104,6 +104,8 @@ config :fun_with_flags, :cache_bust_notifications,
   enabled: true,
   adapter: FunWithFlags.Notifications.PhoenixPubSub,
   client: Trento.PubSub
+
+ config :postgrex, json_library: Jsonrs
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -61,6 +61,7 @@ defmodule Trento.MixProject do
       {:gen_smtp, "~> 1.1.1"},
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.2"},
+      {:jsonrs, github: "fabriziosestito/Jsonrs"},
       {:mock, "~> 0.3.0", only: :test},
       {:mox, "~> 1.0", only: :test},
       {:phoenix, "~> 1.6.2"},
