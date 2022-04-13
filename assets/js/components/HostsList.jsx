@@ -5,6 +5,7 @@ import Table from './Table';
 import Tags from './Tags';
 import { addTagToHost, removeTagFromHost } from '@state/hosts';
 import ClusterLink from '@components/ClusterLink';
+import SapSystemLink from '@components/SapSystemLink';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { EOS_LENS_FILLED } from 'eos-icons-react';
@@ -21,6 +22,20 @@ const getHeartbeatIcon = ({ heartbeat }) => {
     default:
       return <EOS_LENS_FILLED className="fill-gray-500" />;
   }
+};
+
+const getSapSystemsByHost = (sapSystems, hostId) => {
+  const appInstances = sapSystems
+    .flatMap((sapSystem) => sapSystem.application_instances)
+    .filter((sapSystem) => sapSystem.host_id === hostId);
+  const dbInstances = sapSystems
+    .flatMap((sapSystem) => sapSystem.database_instances)
+    .filter((sapSystem) => sapSystem.host_id === hostId);
+
+  return {
+    'sap-systems': appInstances,
+    databases: dbInstances,
+  };
 };
 
 const addTag = (tag, hostId) => {
@@ -42,6 +57,8 @@ const removeTag = (tag, hostId) => {
 const HostsList = () => {
   const hosts = useSelector((state) => state.hostsList.hosts);
   const clusters = useSelector((state) => state.clustersList.clusters);
+  const sapSystems = useSelector((state) => state.sapSystemsList.sapSystems);
+
   const dispatch = useDispatch();
 
   const config = {
@@ -86,16 +103,16 @@ const HostsList = () => {
         key: 'cluster',
         className: 'w-40',
         render: (cluster) => {
-          return cluster?.name;
+          return <ClusterLink cluster={cluster}>{cluster?.name}</ClusterLink>;
         },
       },
       {
         title: 'SID',
         key: 'sid',
-        filter: true,
-        render: (content, { cluster }) => (
-          <ClusterLink cluster={cluster}>{content}</ClusterLink>
-        ),
+        //filter: true,
+        render: (sapSystems) => {
+          return <SapSystemLink sapSystems={sapSystems} />;
+        },
       },
       {
         title: 'Agent version',
@@ -140,7 +157,7 @@ const HostsList = () => {
       hostname: host.hostname,
       ip: host.ip_addresses,
       provider: host.provider,
-      sid: cluster?.sid,
+      sid: getSapSystemsByHost(sapSystems, host.id),
       cluster: cluster,
       agent_version: host.agent_version,
       id: host.id,
