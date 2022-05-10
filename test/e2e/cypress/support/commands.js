@@ -56,3 +56,21 @@ Cypress.Commands.add('navigateToItem', (item) => {
   const items = Array.isArray(item) ? item : [item];
   items.forEach((it) => cy.get('.tn-menu-item').contains(it).click());
 });
+
+Cypress.Commands.add('disableAllChecks', (clusterId) => {  
+  cy.visit(`/clusters/${clusterId}/settings`);
+
+  // Find all active switches and disable them
+  cy.get('button[role="switch"]').each(($el) => {
+    if (cy.wrap($el).should('have.class', 'bg-jungle-green-500')) {
+      cy.wrap($el).click();
+    }
+  });
+  
+  cy.get('button').contains("Select Checks for Execution").click();
+  cy.go('back');
+});
+
+Cypress.Commands.add('clickOutside', () => {
+  return cy.get('body').click(0,0); //0,0 here are the x and y coordinates
+});
