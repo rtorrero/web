@@ -60,14 +60,11 @@ Cypress.Commands.add('navigateToItem', (item) => {
 Cypress.Commands.add('disableAllChecks', (clusterId) => {  
   cy.visit(`/clusters/${clusterId}/settings`);
 
-  // Find all active switches and disable them
-  cy.get('button[role="switch"]').each(($el) => {
-    if (cy.wrap($el).should('have.class', 'bg-jungle-green-500')) {
-      cy.wrap($el).click();
-    }
+  cy.get('button[aria-checked="true"]').then(($btn) => {
+    $btn.click();
+    cy.get('button').contains("Select Checks for Execution").click();
   });
-  
-  cy.get('button').contains("Select Checks for Execution").click();
+
   cy.go('back');
 });
 
