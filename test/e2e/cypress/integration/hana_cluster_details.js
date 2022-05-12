@@ -4,7 +4,6 @@ context("HANA database details", () => {
   before(() => {
     cy.loadScenario("healthy-27-node-SAP-cluster");
     cy.login();
-    cy.disableAllChecks(availableHanaCluster.id);
     cy.visit(`/clusters/${availableHanaCluster.id}`);
     cy.url().should("include", `/clusters/${availableHanaCluster.id}`);
   });
