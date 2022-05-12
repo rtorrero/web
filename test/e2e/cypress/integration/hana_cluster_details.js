@@ -152,7 +152,7 @@ context("HANA database details", () => {
     });
   });
 
-  describe("Settings should include the checks catalog", () => {
+  describe("Settings should allow to enable checks from the checks catalog", () => {
 
     it("should take me to the cluster settings when pressing the settings button", () => {
       cy.get("button").contains("Settings").click();
