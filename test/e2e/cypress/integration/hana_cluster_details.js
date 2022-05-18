@@ -140,7 +140,7 @@ context("HANA database details", () => {
   });
 
   describe("Cluster SBD should have the expected devices with the correct status", () => {
-    availableHanaCluster.sbd.forEach((item, index) => {
+    availableHanaCluster.sbd.forEach((item) => {
       it(`should have SBD device name "${item.deviceName}" and status "${item.status}"`, () => {
         cy.get("div > div > h2")
           .contains("SBD/Fencing")
