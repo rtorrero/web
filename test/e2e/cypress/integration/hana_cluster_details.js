@@ -55,13 +55,16 @@ context("HANA database details", () => {
         .contains(availableHanaCluster.sapHanaSRHealthState);
     });
 
-    // TODO: Add this test once we have persistance for cibLastWritten
+    // TODO: Add this test once we have persistence for cibLastWritten
     // it(`should have CIB last written ${availableHanaCluster.cibLastWritten}`, () => {
     //   cy.get('div').contains("CIB last written").next().contains(availableHanaCluster.cibLastWritten);
     // });
-    
+
     it(`should have hana log operation mode ${availableHanaCluster.hanaSystemReplicationOperationMode}`, () => {
-      cy.get('div').contains("HANA log operation mode").next().contains(availableHanaCluster.hanaSystemReplicationOperationMode);
+      cy.get("div")
+        .contains("HANA log operation mode")
+        .next()
+        .contains(availableHanaCluster.hanaSystemReplicationOperationMode);
     });
   });
 
@@ -153,7 +156,6 @@ context("HANA database details", () => {
   });
 
   describe("Settings should allow to enable checks from the checks catalog", () => {
-
     it("should take me to the cluster settings when pressing the settings button", () => {
       cy.get("button").contains("Settings").click();
     });
