@@ -4,6 +4,7 @@ defmodule Trento.MixProject do
   def project do
     [
       app: :trento,
+      description: "Easing your life in administering SAP applications",
       version: "1.0.0",
       elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -63,6 +64,7 @@ defmodule Trento.MixProject do
       {:jason, "~> 1.2"},
       {:mock, "~> 0.3.0", only: :test},
       {:mox, "~> 1.0", only: :test},
+      {:open_api_spex, "~> 3.11"},
       {:phoenix, "~> 1.6.2"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.0"},
@@ -91,14 +93,14 @@ defmodule Trento.MixProject do
   defp aliases do
     [
       start: [
-        "install",
-        "setup",
+        "cmd docker-compose up -d",
+        "deps.get",
+        "ecto.create",
+        "ecto.migrate",
+        "event_store.setup",
         "phx.server"
       ],
-      "start.full": ["docker-compose up -d postgres grafana", "start"],
-      install: ["deps.get", "cmd --cd assets npm install"],
-      setup: ["event_store.setup", "ecto.setup", "init_grafana_dashboards"],
-      reset: ["event_store.reset", "ecto.reset"],
+      setup: ["deps.get", "event_store.setup", "ecto.setup", "init_grafana_dashboards"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "event_store.setup": ["event_store.create", "event_store.init"],
