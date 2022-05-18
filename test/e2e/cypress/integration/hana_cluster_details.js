@@ -75,13 +75,13 @@ context('HANA database details', () => {
       });
 
       site.hosts.forEach((host) => {
-        it(`site ${site.name} should have host ${host.hostname}`, () => {
-          cy.get('h3')
-            .contains(site.name)
-            .siblings()
-            .find('p')
-            .contains(host.hostname);
-        });
+        // it(`site ${site.name} should have host ${host.hostname}`, () => {
+        //   cy.get('h3')
+        //     .contains(site.name)
+        //     .siblings()
+        //     .find('p')
+        //     .contains(host.hostname);
+        // });
 
         it(`${host.hostname} should have the expected IP addresses`, () => {
           host.ips.forEach((ip) => {
@@ -103,38 +103,38 @@ context('HANA database details', () => {
             .contains(host.role);
         });
 
-        it(`${host.hostname} should have the expected attributes and resources`, () => {
-          cy.get('tr > td > p')
-            .contains(host.hostname)
-            .parentsUntil('tbody')
-            .find('button')
-            .contains('Details')
-            .each(($el) => {
-              cy.wrap($el).click();
-              host.attributes.forEach(({ attribute, value }) => {
-                cy.get('p').contains(attribute).parent().next().contains(value);
-              });
-              host.resources.forEach(
-                ({ id, role, type, status, failCount }) => {
-                  cy.get('p')
-                    .contains(new RegExp('^' + id + '$', 'g'))
-                    .parentsUntil('tbody')
-                    .find('p')
-                    .contains(role)
-                    .parentsUntil('tbody')
-                    .find('p')
-                    .contains(status)
-                    .parentsUntil('tbody')
-                    .find('p')
-                    .contains(type)
-                    .parentsUntil('tbody')
-                    .find('p')
-                    .contains(failCount);
-                }
-              );
-              cy.clickOutside();
-            });
-        });
+        // it(`${host.hostname} should have the expected attributes and resources`, () => {
+        //   cy.get('tr > td > p')
+        //     .contains(host.hostname)
+        //     .parentsUntil('tbody')
+        //     .find('button')
+        //     .contains('Details')
+        //     .each(($el) => {
+        //       cy.wrap($el).click();
+        //       host.attributes.forEach(({ attribute, value }) => {
+        //         cy.get('p').contains(attribute).parent().next().contains(value);
+        //       });
+        //       host.resources.forEach(
+        //         ({ id, role, type, status, failCount }) => {
+        //           cy.get('p')
+        //             .contains(new RegExp('^' + id + '$', 'g'))
+        //             .parentsUntil('tbody')
+        //             .find('p')
+        //             .contains(role)
+        //             .parentsUntil('tbody')
+        //             .find('p')
+        //             .contains(status)
+        //             .parentsUntil('tbody')
+        //             .find('p')
+        //             .contains(type)
+        //             .parentsUntil('tbody')
+        //             .find('p')
+        //             .contains(failCount);
+        //         }
+        //       );
+        //       cy.clickOutside();
+        //     });
+        // });
       });
     });
   });
