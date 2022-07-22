@@ -425,7 +425,7 @@ jobs:
     name: Deploy updated images to the demo environment
     runs-on: self-hosted
     if: github.event_name == 'release' || (github.event_name == 'push' && github.ref_name == 'main') || github.event_name == 'workflow_dispatch'
-    needs: build-and-push-container-images
+    #needs: build-and-push-container-images
     steps:
       - name: Start a local k8s cluster
         uses: jupyterhub/action-k3s-helm@v3
@@ -451,18 +451,18 @@ jobs:
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo update
-      - name: Download helm chart
+
+      - name: Download and unzip helm chart
         run: |
           rm rolling.zip | true
           rm -rf helm-charts-rolling | true
-          wget https://github.com/trento-project/helm-charts/archive/refs/tags/rolling.zip          
+          wget https://github.com/trento-project/helm-charts/archive/refs/tags/rolling.zip
           unzip rolling.zip
-          pushd helm-charts-rolling
-          helm dep update
-          pushd charts/trento-server
-          pwd
+
+      - name: Install trento-server helm chart
+        run: |
+          cd helm-charts-rolling/charts/trento-server
           helm dependency update
-          pwd
           helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa
 
   obs-commit:
