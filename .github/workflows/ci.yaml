@@ -464,7 +464,7 @@ jobs:
           cd helm-charts-rolling/charts/trento-server
           helm dependency update
           helm uninstall --wait trento | true
-          helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa
+          helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa --set trento-web.adminUser.password="adminpassword"
 
   obs-commit:
     name: Commit the project on OBS
