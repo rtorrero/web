@@ -447,6 +447,20 @@ jobs:
           helm version
           helm list
 
+      - name: Add bitnami helm deps
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
+      - name: Download helm chart
+        run: |
+          wget https://github.com/trento-project/helm-charts/archive/refs/tags/rolling.zip
+          unzip rolling.zip
+          cd helm-charts-rolling
+          helm dep update
+          cd charts/trento-server
+          helm dependency update
+          helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa
+
   obs-commit:
     name: Commit the project on OBS
     runs-on: ubuntu-20.04
