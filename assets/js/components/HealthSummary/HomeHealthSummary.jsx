@@ -56,7 +56,7 @@ const healthSummaryTableConfig = {
 const GlobalHealth = ({ data }) => {
   return (
     <Fragment>
-      <h1 className="text-2xl font-semibold">At a glance</h1>
+      <h1 className="text-2xl font-semibold">Just a test</h1>
       <hr className="my-3" />
       <h5 className="text-xl">Global Health</h5>
       <HealthSummary data={data} />
