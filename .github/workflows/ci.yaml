@@ -455,11 +455,13 @@ jobs:
         run: |
           wget https://github.com/trento-project/helm-charts/archive/refs/tags/rolling.zip
           unzip rolling.zip
-          cd helm-charts-rolling
+          rm rolling.zip
+          pushd helm-charts-rolling
           helm dep update
-          cd charts/trento-server
+          pushd charts/trento-server
           helm dependency update
           helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa
+          popd && popd
 
   obs-commit:
     name: Commit the project on OBS
