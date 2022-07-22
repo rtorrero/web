@@ -462,6 +462,7 @@ jobs:
           helm dependency update
           helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa
           popd && popd
+          rm -rf helm-charts-rolling
 
   obs-commit:
     name: Commit the project on OBS
