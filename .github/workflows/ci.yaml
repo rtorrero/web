@@ -425,6 +425,10 @@ jobs:
     name: Deploy updated images to the demo environment
     runs-on: self-hosted
     if: github.event_name == 'release' || (github.event_name == 'push' && github.ref_name == 'main') || github.event_name == 'workflow_dispatch'
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_REPOSITORY: ghcr.io/${{ github.repository_owner }}/trento-web
+      IMAGE_TAG: "${{ (github.event_name == 'release' && github.event.release.tag_name) || (github.event_name == 'push' && github.ref_name == 'main' && 'rolling') || github.sha }}"
     #needs: build-and-push-container-images
     steps:
       - name: Start a local k8s cluster
@@ -464,7 +468,7 @@ jobs:
           cd helm-charts-rolling/charts/trento-server
           helm dependency update
           helm uninstall --wait trento | true
-          helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa --set trento-web.adminUser.password="adminpassword"
+          helm install trento . --set-file trento-runner.privateKey=/home/azureuser/.ssh/id_rsa --set trento-web.adminUser.password="adminpassword" --set trento-web.image.repository="${IMAGE_REPOSITORY}" --set trento-web.image.tag="rolling"
 
   obs-commit:
     name: Commit the project on OBS
