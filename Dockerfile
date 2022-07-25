@@ -7,7 +7,8 @@ RUN zypper -n --gpg-auto-import-keys ref -s
 RUN zypper -n in elixir
 COPY . /build
 WORKDIR /build
-ENV MIX_ENV=prod
+ARG MIX_ENV
+ENV MIX_ENV=${MIX_ENV:-prod}
 RUN mix local.rebar --force \
     && mix local.hex --force \
     && mix deps.get
@@ -22,7 +23,8 @@ RUN npm run build
 FROM elixir-build AS release
 COPY --from=assets-build /build /build
 WORKDIR /build
-ENV MIX_ENV=prod
+ARG MIX_ENV
+ENV MIX_ENV=${MIX_ENV:-prod}
 RUN mix phx.digest
 RUN mix release
 
