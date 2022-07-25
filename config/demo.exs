@@ -54,7 +54,7 @@ config :trento, Trento.Scheduler,
       task: {Trento.Heartbeats.Faker, :send_heartbeats},
       run_strategy: {Quantum.RunStrategy.Random, :cluster},
       overlap: false
-    ],
+    ]
   ]
 
 config :trento, Trento.Integration.Telemetry, adapter: Trento.Integration.Telemetry.ToLogger
