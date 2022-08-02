@@ -433,7 +433,6 @@ jobs:
       MIX_ENV: demo
       REGISTRY: ghcr.io
       IMAGE_REPOSITORY: ghcr.io/${{ github.repository_owner }}/trento-web
-      IMAGE_TAG: "${{ (github.event_name == 'release' && github.event.release.tag_name) || (github.event_name == 'push' && github.ref_name == 'main' && 'rolling') || github.sha }}"
     steps:
       - uses: actions/checkout@v3
         with:

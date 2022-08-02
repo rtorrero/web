@@ -23,6 +23,8 @@ RUN npm run build
 FROM elixir-build AS release
 COPY --from=assets-build /build /build
 WORKDIR /build
+ARG MIX_ENV=prod
+ENV MIX_ENV=$MIX_ENV
 RUN mix phx.digest
 RUN mix release
 

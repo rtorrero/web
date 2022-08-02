@@ -9,7 +9,7 @@ defmodule Trento.Heartbeats.Faker do
   def send_heartbeats do
     hosts = Hosts.get_all_hosts()
 
-    Enum.map(hosts, fn host ->
+    Enum.each(hosts, fn host ->
       Logger.info("Sending fake heartbeat for host #{host.id}")
       Trento.Heartbeats.heartbeat(host.id)
     end)
