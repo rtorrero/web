@@ -1,6 +1,23 @@
 # How to contribute
 
-We're really glad you're reading this, because we need volunteer developers to help this project come to fruition.
+Thanks for showing interest and sharing your time to contribute to this project!
+
+This guide is meant to be used to get an overview of the different forms in
+which contributors participate in the project by:
+ - Opening issues
+ - Creating PRs
+ - Reviewing PRs
+
+
+
+## Opening issues
+
+### Create a new issue
+Before creating a new issue make sure you use the search to confirm that a 
+similar issue doesn't already exist. After that, you can crea
+
+#### Issue labels
+Be sure to check https://github.com/trento-project/web/labels
 
 ## Submitting changes
 
