@@ -1,17 +1,29 @@
- All Submissions:
+# Description
 
-* [ ] Have you followed the guidelines in our Contributing document?
-* [ ] Have you checked to ensure there aren't other open [Pull Requests](../../../pulls) for the same update/change?
+Please include a summary of the changes and the related issue. Please also include relevant motivation and context. List any dependencies that are required for this change.
 
-<!-- You can erase any parts of this template not applicable to your Pull Request. -->
+Fixes # (issue)
 
-### New Feature Submissions:
+## Type of change
 
-1. [ ] Does your submission pass tests?
-2. [ ] Have you lint your code locally before submission?
+Please delete options that are not relevant.
 
-### Changes to Core Features:
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] This change requires a documentation update
 
-* [ ] Have you added an explanation of what your changes do and why you'd like us to include them?
-* [ ] Have you written new tests for your core changes, as applicable?
-* [ ] Have you successfully run tests with your changes locally?
+# How Has This Been Tested?
+
+Please describe the tests that you wrote to verify your changes. //FIXME: Do we want this?
+
+# Checklist:
+
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] New and existing unit tests pass locally with my changes
+- [ ] Any dependent changes have been merged and published in downstream modules
