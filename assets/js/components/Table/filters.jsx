@@ -1,8 +1,9 @@
 import React from 'react';
-
 import { uniq } from '@lib/lists';
-
+import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 import Filter from './Filter';
+import { useEffect } from 'react';
 
 const getDefaultFilterFunction = (filter, key) => (element) => {
   return filter.includes(element[key]);
@@ -30,20 +31,19 @@ const setFilter = (filters, filterKey, filterValue, filterFunction) => {
     : [...filtersList, { key: filterKey, value: filterValue, filterFunction }];
 };
 
-const getFilter = (key, list) =>
-  list.reduce(
-    (accumulator, current) =>
-      current.key === key && accumulator.length === 0
-        ? current.value
-        : accumulator,
-    []
-  );
-
 export const TableFilters = ({ config, data, filters, onChange }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const filterFunction = (list, column) =>
+    typeof column.filter === 'function'
+      ? column.filter(list, column.key)
+      : getDefaultFilterFunction(list, column.key);
+
   return config.columns
     .filter(({ filter }) => Boolean(filter))
     .map((column) => {
-      const filterValue = getFilter(column.key, filters);
+      const [filterValue, setFilterValue] = useState([]);
+
       const filterOptions = uniq(
         data
           .map(({ [column.key]: option }) => option)
@@ -51,20 +51,42 @@ export const TableFilters = ({ config, data, filters, onChange }) => {
           .concat(filterValue)
       );
 
+      useEffect(() => {
+        setFilterValue(searchParams.getAll(column.key));
+      }, [searchParams]);
+
+      useEffect(() => {
+        onChange(
+          setFilter(
+            filters,
+            column.key,
+            searchParams.getAll(column.key),
+            filterFunction(filterValue, column)
+          )
+        );
+      }, [JSON.stringify(filterValue)]);
+
+      const applyFilters = (list) => {
+        let newSearchParams = searchParams;
+        newSearchParams.delete(column.key);
+        list.forEach((elem) => {
+          newSearchParams.append(column.key, elem);
+        });
+        setSearchParams(newSearchParams);
+        setFilterValue(list);
+
+        onChange(
+          setFilter(filters, column.key, list, filterFunction(list, column))
+        );
+      };
+
       return (
         <Filter
           key={column.key}
           title={column.title}
           options={filterOptions}
           value={filterValue}
-          onChange={(list) => {
-            const filterFunction =
-              typeof column.filter === 'function'
-                ? column.filter(list, column.key)
-                : getDefaultFilterFunction(list, column.key);
-
-            onChange(setFilter(filters, column.key, list, filterFunction));
-          }}
+          onChange={(filterValue) => applyFilters(filterValue)}
         />
       );
     });
