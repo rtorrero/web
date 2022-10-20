@@ -100,8 +100,6 @@ const isHighestPrio = (predicate, label) => {
       console.error('Unknown health state: ', label);
   }
 
-  console.log('Predicate: ', predicate);
-  console.log('Label: ', label);
   return true;
 };
 
@@ -185,11 +183,7 @@ export const HomeHealthSummary = () => {
   }, [healthFilters]);
 
   const onFiltersChange = (filterValue) => {
-    const newFilters = healthFilters.includes(filterValue)
-      ? healthFilters.filter((f) => f !== filterValue)
-      : [...healthFilters, filterValue];
-
-    setQueryValues({ health: newFilters });
+    setQueryValues({ health: [filterValue] });
   };
 
   return loading ? (
