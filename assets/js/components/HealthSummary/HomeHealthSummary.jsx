@@ -69,6 +69,42 @@ const any = (predicate, label) =>
     return predicate[key] === label;
   }, false);
 
+const isHighestPrio = (predicate, label) => {
+  switch (label) {
+    case 'critical':
+      return any(predicate, label);
+
+    case 'warning':
+      return (
+        any(predicate, label) &&
+        (predicate.clustersHealth != 'critical' ||
+          predicate.clustersHealth != 'warning') &&
+        (predicate.databaseHealth != 'critical' ||
+          predicate.databaseHealth != 'warning') &&
+        (predicate.hostsHealth != 'critical' ||
+          predicate.hostsHealth != 'warning')
+      );
+
+    case 'passing':
+      return (
+        any(predicate, label) &&
+        predicate.clustersHealth != 'critical' &&
+        predicate.clustersHealth != 'warning' &&
+        predicate.databaseHealth != 'critical' &&
+        predicate.databaseHealth != 'warning' &&
+        predicate.hostsHealth != 'critical' &&
+        predicate.hostsHealth != 'warning'
+      );
+
+    default:
+      console.error('Unknown health state: ', label);
+  }
+
+  console.log('Predicate: ', predicate);
+  console.log('Label: ', label);
+  return true;
+};
+
 const getCounters = (data) => {
   const defaultCounter = { critical: 0, warning: 0, passing: 0, unknown: 0 };
 
@@ -121,16 +157,29 @@ export const HomeHealthSummary = () => {
   }, [sapSystemsHealth]);
 
   useEffect(() => {
-    setActiveFilters(
-      healthFilters.reduce((acc, curr) => ({ ...acc, [curr]: true }), {})
+    console.log('Active filters now:', activeFilters);
+    console.log('Summary data: ', summaryData);
+    console.log('Health filter: ', healthFilters);
+    console.log('SAP systems health: ', sapSystemsHealth);
+    const nextActiveFilters = healthFilters.reduce(
+      (acc, curr) => ({ ...acc, [curr]: true }),
+      {}
     );
+    console.log('Next active filters: ', nextActiveFilters);
+    setActiveFilters(
+      //healthFilters.reduce((acc, curr) => ({ ...acc, [curr]: true }), {})
+      nextActiveFilters
+    );
+    console.log('Active filters now:', activeFilters);
     if (healthFilters.length === 0) {
       setSummaryData(sapSystemsHealth);
       return;
     }
     setSummaryData(
       sapSystemsHealth.filter((e) => {
-        return healthFilters.every((f) => any(e, f));
+        console.log('this is happening: ', e);
+        //return healthFilters.every((f) => any(e, f));
+        return healthFilters.every((f) => isHighestPrio(e, f));
       })
     );
   }, [healthFilters]);
