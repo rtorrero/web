@@ -140,6 +140,9 @@ export const HomeHealthSummary = () => {
     setQueryValues,
   } = useQueryStringValues(['health']);
 
+  console.log(useQueryStringValues(['health']));
+  console.log('healthFilters: ', healthFilters);
+
   const [counters, setCounters] = useState({
     warning: 0,
     critical: 0,
@@ -155,19 +158,11 @@ export const HomeHealthSummary = () => {
   }, [sapSystemsHealth]);
 
   useEffect(() => {
-    console.log('Active filters now:', activeFilters);
-    console.log('Summary data: ', summaryData);
-    console.log('Health filter: ', healthFilters);
-    console.log('SAP systems health: ', sapSystemsHealth);
     const nextActiveFilters = healthFilters.reduce(
       (acc, curr) => ({ ...acc, [curr]: true }),
       {}
     );
-    console.log('Next active filters: ', nextActiveFilters);
-    setActiveFilters(
-      //healthFilters.reduce((acc, curr) => ({ ...acc, [curr]: true }), {})
-      nextActiveFilters
-    );
+    setActiveFilters(nextActiveFilters);
     console.log('Active filters now:', activeFilters);
     if (healthFilters.length === 0) {
       setSummaryData(sapSystemsHealth);
@@ -175,12 +170,10 @@ export const HomeHealthSummary = () => {
     }
     setSummaryData(
       sapSystemsHealth.filter((e) => {
-        console.log('this is happening: ', e);
-        //return healthFilters.every((f) => any(e, f));
         return healthFilters.every((f) => isHighestPrio(e, f));
       })
     );
-  }, [healthFilters]);
+  }, [JSON.stringify(healthFilters)]);
 
   const onFiltersChange = (filterValue) => {
     setQueryValues({ health: [filterValue] });
