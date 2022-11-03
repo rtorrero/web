@@ -4,9 +4,13 @@ import Table from './Table';
 import Tags from './Tags';
 import { addTagToCluster, removeTagFromCluster } from '@state/clusters';
 import ClusterLink from '@components/ClusterLink';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { ExecutionIcon } from '@components/ClusterDetails';
-import { ComponentHealthSummary } from '@components/HealthSummary';
+//import { ComponentHealthSummary } from '@components/HealthSummary';
+import HealthSummary from '@components/HealthSummary';
 import { post, del } from '@lib/network';
+import useQueryStringValues from '@hooks/useQueryStringValues';
 
 const getClusterTypeLabel = (type) => {
   switch (type) {
@@ -125,9 +129,116 @@ const ClustersList = () => {
     };
   });
 
+  const isMostRelevantPrio = (predicate, label) => {
+    switch (label) {
+      case 'critical':
+        return any(predicate, label);
+
+      case 'warning':
+        return !any(predicate, 'critical') && any(predicate, label);
+
+      case 'passing':
+        return (
+          !any(predicate, 'critical') &&
+          !any(predicate, 'warning') &&
+          any(predicate, label)
+        );
+    }
+  };
+
+  const any = (predicate, label) =>
+    Object.keys(predicate).reduce((accumulator, key) => {
+      if (accumulator) {
+        return true;
+      }
+      return predicate[key] === label;
+    }, false);
+
+  const getCounters = (data) => {
+    const defaultCounter = { critical: 0, warning: 0, passing: 0, unknown: 0 };
+
+    if (!data || 0 === data.length) {
+      return defaultCounter;
+    }
+
+    return data.reduce((accumulator, element) => {
+      if (isMostRelevantPrio(element, 'critical')) {
+        return { ...accumulator, critical: accumulator.critical + 1 };
+      }
+
+      if (isMostRelevantPrio(element, 'warning')) {
+        return { ...accumulator, warning: accumulator.warning + 1 };
+      }
+
+      if (isMostRelevantPrio(element, 'unknown')) {
+        return { ...accumulator, unknown: accumulator.unknown + 1 };
+      }
+
+      if (isMostRelevantPrio(element, 'passing')) {
+        return { ...accumulator, passing: accumulator.passing + 1 };
+      }
+      return accumulator;
+    }, defaultCounter);
+  };
+
+  const { loading, sapSystemsHealth } = useSelector(
+    (state) => state.sapSystemsHealthSummary
+  );
+
+  const {
+    extractedParams: { health: healthFilters = [] },
+    setQueryValues,
+  } = useQueryStringValues(['health']);
+
+  const [counters, setCounters] = useState({
+    warning: 0,
+    critical: 0,
+    passing: 0,
+  });
+
+  const [summaryData, setSummaryData] = useState([]);
+  const [activeFilters, setActiveFilters] = useState({});
+
+  useEffect(() => {
+    setCounters(getCounters(sapSystemsHealth));
+    setSummaryData(sapSystemsHealth);
+  }, [sapSystemsHealth]);
+
+  useEffect(() => {
+    setActiveFilters(
+      healthFilters.reduce((acc, curr) => ({ ...acc, [curr]: true }), {})
+    );
+    if (healthFilters.length === 0) {
+      setSummaryData(sapSystemsHealth);
+      return;
+    }
+    setSummaryData(
+      sapSystemsHealth.filter((e) => {
+        let result = false;
+
+        healthFilters.forEach((f) => {
+          result = result || isMostRelevantPrio(e, f);
+        });
+        return result;
+      })
+    );
+  }, [healthFilters]);
+
+  const onFiltersChange = (filterValue) => {
+    const newFilters = healthFilters.includes(filterValue)
+      ? healthFilters.filter((f) => f !== filterValue)
+      : [...healthFilters, filterValue];
+
+    setQueryValues({ health: newFilters });
+  };
+
   return (
     <Fragment>
-      <ComponentHealthSummary data={data} />
+      <HealthSummary
+        {...counters}
+        onFilterChange={onFiltersChange}
+        activeFilters={activeFilters}
+      />
       <Table config={config} data={data} />
     </Fragment>
   );

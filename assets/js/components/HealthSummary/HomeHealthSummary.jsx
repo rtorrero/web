@@ -71,6 +71,23 @@ const healthSummaryTableConfig = {
   ],
 };
 
+const isMostRelevantPrio = (predicate, label) => {
+  switch (label) {
+    case 'critical':
+      return any(predicate, label);
+
+    case 'warning':
+      return !any(predicate, 'critical') && any(predicate, label);
+
+    case 'passing':
+      return (
+        !any(predicate, 'critical') &&
+        !any(predicate, 'warning') &&
+        any(predicate, label)
+      );
+  }
+};
+
 const any = (predicate, label) =>
   Object.keys(predicate).reduce((accumulator, key) => {
     if (accumulator) {
@@ -87,19 +104,19 @@ const getCounters = (data) => {
   }
 
   return data.reduce((accumulator, element) => {
-    if (any(element, 'critical')) {
+    if (isMostRelevantPrio(element, 'critical')) {
       return { ...accumulator, critical: accumulator.critical + 1 };
     }
 
-    if (any(element, 'warning')) {
+    if (isMostRelevantPrio(element, 'warning')) {
       return { ...accumulator, warning: accumulator.warning + 1 };
     }
 
-    if (any(element, 'unknown')) {
+    if (isMostRelevantPrio(element, 'unknown')) {
       return { ...accumulator, unknown: accumulator.unknown + 1 };
     }
 
-    if (any(element, 'passing')) {
+    if (isMostRelevantPrio(element, 'passing')) {
       return { ...accumulator, passing: accumulator.passing + 1 };
     }
     return accumulator;
@@ -140,7 +157,12 @@ export const HomeHealthSummary = () => {
     }
     setSummaryData(
       sapSystemsHealth.filter((e) => {
-        return healthFilters.every((f) => any(e, f));
+        let result = false;
+
+        healthFilters.forEach((f) => {
+          result = result || isMostRelevantPrio(e, f);
+        });
+        return result;
       })
     );
   }, [healthFilters]);
