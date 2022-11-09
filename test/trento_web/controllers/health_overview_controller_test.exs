@@ -18,7 +18,8 @@ defmodule TrentoWeb.HealthOverviewControllerTest do
 
     %Trento.SapSystemReadModel{
       id: sap_system_id,
-      sid: sid
+      sid: sid,
+      tenant: tenant
     } = insert(:sap_system, health: Health.critical())
 
     insert(
