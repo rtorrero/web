@@ -51,23 +51,29 @@ export const getChecks = (checkResults) => {
 };
 
 export const getHealth = (checkResults, checkID, agentID) => {
+  console.log('checkResults,', checkResults);
+  console.log('checkID,', checkID);
+  console.log('agentID,', JSON.stringify(agentID));
   const checkResult = checkResults.find(({ check_id }) => check_id === checkID);
   if (!checkResult) {
     return;
   }
-
+  console.log('Check result is: ', JSON.stringify(checkResult));
   const agentCheckResult = checkResult.agents_check_results.find(
     ({ agent_id }) => agent_id === agentID
   );
 
-  const failedExpectationEvaluations = agentCheckResult?.expectation_evaluations
-    .filter((expectationEvaluation) => 'message' in expectationEvaluation)
-    .filter(({ type }) => type !== 'expect');
+  console.log('agentCheckResult is: ', JSON.stringify(agentCheckResult));
+  // const failedExpectationEvaluations = agentCheckResult?.expectation_evaluations
+  //   .filter((expectationEvaluation) => 'message' in expectationEvaluation)
+  //   .filter(({ type }) => type !== 'expect');
 
   return {
-    expectations: checkResult.expectation_results.length,
-    failedExpectations: failedExpectationEvaluations.length,
-    health: failedExpectationEvaluations.length > 0 ? 'critical' : 'passing',
+    // expectations: checkResult.expectation_results.length,
+    expectations: [],
+    //failedExpectations: failedExpectationEvaluations.length,
+    //health: failedExpectationEvaluations.length > 0 ? 'critical' : 'passing',
+    health: 'pending',
   };
 };
 

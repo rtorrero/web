@@ -67,12 +67,13 @@ const ExecutionResults = ({
     return <LoadingBox text="Loading checks execution..." />;
   }
 
-  if (executionData?.status === 'running') {
-    return <LoadingBox text="Check execution currently running..." />;
-  }
+  // if (executionData?.status === 'running') {
+  //   return <LoadingBox text="Check execution currently running..." />;
+  // }
 
   const checkResults = getCheckResults(executionData);
   const hosts = getHosts(checkResults);
+  console.log('THIS IS HOW getHosts looks: ', hosts);
   const checks = getChecks(checkResults);
 
   return (
@@ -114,43 +115,38 @@ const ExecutionResults = ({
         selectedChecks={checks}
         onCatalogRefresh={onCatalogRefresh}
       >
-        {hosts &&
-          hosts.map((hostID, idx) => (
-            <HostResultsWrapper
-              key={idx}
-              hostname={hostnames.find(({ id }) => hostID === id)?.hostname}
-              reachable
-              unreachableMessage=""
-            >
-              {checks.map((checkID) => {
-                const { health, expectations, failedExpectations } = getHealth(
-                  checkResults,
-                  checkID,
-                  hostID
-                );
-                const label = getLabel(
-                  health,
-                  expectations,
-                  failedExpectations
-                );
+        {executionData?.targets.map(({ agent_id: hostID, checks: checks }) => (
+          <HostResultsWrapper
+            key={hostID}
+            hostname={hostnames.find(({ id }) => hostID === id)?.hostname}
+            reachable
+            unreachableMessage=""
+          >
+            {checks.map((checkID) => {
+              const { health, expectations, failedExpectations } = getHealth(
+                executionData?.check_results,
+                checkID,
+                hostID
+              );
+              const label = getLabel(health, expectations, failedExpectations);
 
-                return (
-                  <CheckResult
-                    key={checkID}
-                    checkId={checkID}
-                    description={getCheckDescription(catalog, checkID)}
-                    executionState={executionData?.status}
-                    health={health}
-                    label={label}
-                    onClick={() => {
-                      setModalOpen(true);
-                      setSelectedCheck(checkID);
-                    }}
-                  />
-                );
-              })}
-            </HostResultsWrapper>
-          ))}
+              return (
+                <CheckResult
+                  key={checkID}
+                  checkId={checkID}
+                  description={getCheckDescription(catalog, checkID)}
+                  executionState={executionData?.status}
+                  health={health}
+                  label={label}
+                  onClick={() => {
+                    setModalOpen(true);
+                    setSelectedCheck(checkID);
+                  }}
+                />
+              );
+            })}
+          </HostResultsWrapper>
+        ))}
       </ResultsContainer>
     </div>
   );

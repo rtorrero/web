@@ -10,3 +10,6 @@ export const getExecutionResult = (executionID) =>
   wandaClient.get(`/api/checks/executions/${executionID}`);
 
 export const getCatalog = () => wandaClient.get('/api/checks/catalog');
+
+export const getCurrentExecution = (groupID) =>
+  wandaClient.get(`/api/checks/groups/${groupID}/executions/last`);
