@@ -113,7 +113,7 @@ function ClusterDetails() {
 
   return (
     <div>
-      <BackButton url={`/clusters`}>Back to Clusters</BackButton>
+      <BackButton url="/clusters">Back to Clusters</BackButton>
       <div className="flex mb-4">
         <h1 className="text-3xl font-bold w-1/2">
           Pacemaker cluster details:{' '}
