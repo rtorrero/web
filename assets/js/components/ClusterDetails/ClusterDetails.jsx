@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '@components/Button';
 
+import BackButton from '@components/BackButton';
 import ListView from '@components/ListView';
 import Pill from '@components/Pill';
 import Table from '@components/Table';
@@ -112,6 +113,7 @@ function ClusterDetails() {
 
   return (
     <div>
+      <BackButton url={`/clusters`}>Back to Clusters</BackButton>
       <div className="flex mb-4">
         <h1 className="text-3xl font-bold w-1/2">
           Pacemaker cluster details:{' '}
@@ -246,7 +248,7 @@ function ClusterDetails() {
       <div className="mt-2 tn-site-details">
         {Object.entries(groupBy(cluster.details.nodes, 'site')).map(
           ([siteName]) => (
-            <div key={siteName} className={`tn-site-details-${siteName}`}>
+            <div key={siteName} className={`tn-site-details-${siteName} mt-4`}>
               <h3 className="text-l font-bold tn-site-name">{siteName}</h3>
               <Table
                 className="tn-site-table"
