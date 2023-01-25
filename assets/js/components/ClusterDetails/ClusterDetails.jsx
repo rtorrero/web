@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '@components/Button';
 
+import PageHeader from '@components/PageHeader';
 import BackButton from '@components/BackButton';
 import ListView from '@components/ListView';
 import Pill from '@components/Pill';
@@ -25,10 +26,6 @@ import ChecksResultOverview from '@components/ClusterDetails/ChecksResultOvervie
 import { useChecksResult } from '@components/ClusterDetails/hooks';
 import { executionRequested } from '@state/actions/lastExecutions';
 import SiteDetails from './SiteDetails';
-
-export const truncatedClusterNameClasses = classNames(
-  'font-bold truncate w-60 inline-block align-top'
-);
 
 const siteDetailsConfig = {
   usePadding: false,
@@ -114,13 +111,11 @@ function ClusterDetails() {
   return (
     <div>
       <BackButton url="/clusters">Back to Clusters</BackButton>
-      <div className="flex mb-4">
-        <h1 className="text-3xl font-bold w-1/2">
-          Pacemaker cluster details:{' '}
-          <span className={truncatedClusterNameClasses}>
-            {getClusterName(cluster)}
-          </span>
-        </h1>
+      <div className="flex">
+        <PageHeader
+          header="Pacemaker Cluster Details: "
+          highlighted={getClusterName(cluster)}
+        />
         <div className="flex w-1/2 justify-end">
           <Button
             type="primary-white"

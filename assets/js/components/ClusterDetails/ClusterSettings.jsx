@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { EOS_CANCEL, EOS_PLAY_CIRCLE } from 'eos-icons-react';
 import classNames from 'classnames';
 
+import PageHeader from '@components/PageHeader';
 import BackButton from '@components/BackButton';
 import { Tab } from '@headlessui/react';
 import { ChecksSelection } from '@components/ClusterDetails/ChecksSelection';
@@ -14,8 +15,6 @@ import { getClusterName } from '@components/ClusterLink';
 import WarningBanner from '@components/Banners/WarningBanner';
 import { ConnectionSettings, ClusterInfoBox } from '@components/ClusterDetails';
 import { getClusterHostIDs } from '@state/selectors/cluster';
-
-import { truncatedClusterNameClasses } from './ClusterDetails';
 
 export const UNKNOWN_PROVIDER = 'unknown';
 
@@ -42,14 +41,10 @@ export function ClusterSettings() {
       <BackButton url={`/clusters/${clusterID}`}>
         Back to Cluster Details
       </BackButton>
-      <div className="flex mb-2">
-        <h1 className="text-3xl w-1/2">
-          <span className="font-medium">Cluster Settings for</span>{' '}
-          <span className={`font-bold ${truncatedClusterNameClasses}`}>
-            {getClusterName(cluster)}
-          </span>
-        </h1>
-      </div>
+      <PageHeader
+        header="Cluster Settings for "
+        highlighted={getClusterName(cluster)}
+      />
       <Tab.Group manual>
         <Tab.List className="flex p-1 space-x-1 bg-zinc-300/20 rounded">
           {Object.keys(tabsSettings).map((tabTitle) => (

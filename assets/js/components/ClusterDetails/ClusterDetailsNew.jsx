@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { groupBy } from '@lib/lists';
 import classNames from 'classnames';
 
+import PageHeader from '@components/PageHeader';
 import BackButton from '@components/BackButton';
 import Button from '@components/Button';
 import ListView from '@components/ListView';
@@ -117,13 +118,11 @@ export function ClusterDetailsNew() {
   return (
     <div>
       <BackButton url="/clusters">Back to Clusters</BackButton>
-      <div className="flex mb-4">
-        <h1 className="text-3xl font-bold w-1/2">
-          Pacemaker cluster details:{' '}
-          <span className={truncatedClusterNameClasses}>
-            {getClusterName(cluster)}
-          </span>
-        </h1>
+      <div className="flex">
+        <PageHeader
+          header="Pacemaker Cluster Details: "
+          highlighted={getClusterName(cluster)}
+        />
         <div className="flex w-1/2 justify-end">
           <Button
             type="primary-white"

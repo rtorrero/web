@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { getCluster } from '@state/selectors';
 
+import PageHeader from '@components/PageHeader';
 import BackButton from '@components/BackButton';
 import { getClusterName } from '@components/ClusterLink';
 import { ClusterInfoBox } from '@components/ClusterDetails';
@@ -25,14 +26,10 @@ export function ClusterSettingsNew() {
       <BackButton url={`/clusters_new/${clusterID}`}>
         Back to Cluster Details
       </BackButton>
-      <div className="flex mb-2">
-        <h1 className="text-3xl w-1/2">
-          <span className="font-medium">Checks Selection for </span>{' '}
-          <span className="font-bold truncate w-60 inline-block align-top">
-            {getClusterName(cluster)}
-          </span>
-        </h1>
-      </div>
+      <PageHeader
+        header="Checks Selection for "
+        highlighted={getClusterName(cluster)}
+      />
       <ClusterInfoBox haScenario={cluster.type} provider={cluster.provider} />
       {cluster.provider === UNKNOWN_PROVIDER && (
         <WarningBanner>
