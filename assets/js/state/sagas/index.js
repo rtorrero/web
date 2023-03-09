@@ -14,6 +14,7 @@ import {
   setHosts,
   appendHost,
   updateHost,
+  removeHost,
   startHostsLoading,
   stopHostsLoading,
   setHeartbeatPassing,
@@ -167,6 +168,26 @@ function* hostRegistered({ payload }) {
 
 function* watchHostRegistered() {
   yield takeEvery('HOST_REGISTERED', hostRegistered);
+}
+
+function* hostDeregistered({ payload }) {
+  yield put(removeHost(payload));
+  yield put(
+    appendEntryToLiveFeed({
+      source: payload.hostname,
+      message: 'Host deregistered.',
+    })
+  );
+  yield put(
+    notify({
+      text: `The host ${payload.hostname} has been deregistered.`,
+      icon: 'ℹ️',
+    })
+  );
+}
+
+function* watchHostDeregistered() {
+  yield takeEvery('HOST_DEREGISTERED', hostDeregistered);
 }
 
 function* hostDetailsUpdated({ payload }) {
@@ -528,6 +549,7 @@ export default function* rootSaga() {
     watchUserLoggedIn(),
     watchResetState(),
     watchHostRegistered(),
+    watchHostDeregistered(),
     watchHostDetailsUpdated(),
     watchHeartbeatSucceded(),
     watchHeartbeatFailed(),

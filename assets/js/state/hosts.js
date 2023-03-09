@@ -25,6 +25,9 @@ export const hostsListSlice = createSlice({
         return host;
       });
     },
+    removeHost: (state, action) => {
+      state.hosts = state.hosts.filter((host) => host.id !== action.payload.id);
+    },
     addTagToHost: (state, action) => {
       state.hosts = state.hosts.map((host) => {
         if (host.id === action.payload.id) {
@@ -72,6 +75,7 @@ export const {
   setHosts,
   appendHost,
   updateHost,
+  removeHost,
   addTagToHost,
   removeTagFromHost,
   startHostsLoading,
