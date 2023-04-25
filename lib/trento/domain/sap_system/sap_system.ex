@@ -711,6 +711,7 @@ defmodule Trento.Domain.SapSystem do
   defp maybe_emit_sap_system_deregistered_event(
          %SapSystem{
            sap_system_id: sap_system_id,
+           sid: sid,
            application: %Application{
              instances: instances
            }
