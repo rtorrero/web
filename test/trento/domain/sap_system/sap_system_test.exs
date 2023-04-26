@@ -1693,16 +1693,7 @@ defmodule Trento.SapSystemTest do
                      ]
                    },
                    application: %Application{
-                     instances: [
-                       %Instance{
-                         instance_number: ^enqrep_server_instance_number,
-                         host_id: ^enqrep_host_id
-                       },
-                       %Instance{
-                         instance_number: ^message_server_instance_number,
-                         host_id: ^message_server_host_id
-                       }
-                     ]
+                     instances: []
                    },
                    deregistered_at: ^deregistered_at
                  } = sap_system
