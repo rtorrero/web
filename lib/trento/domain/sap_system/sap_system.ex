@@ -842,7 +842,6 @@ defmodule Trento.Domain.SapSystem do
          },
          deregistered_at
        ) do
-    IO.inspect("NO DB instances left, deregistering complete db")
     %DatabaseDeregistered{sap_system_id: sap_system_id, deregistered_at: deregistered_at}
   end
 
@@ -866,13 +865,7 @@ defmodule Trento.Domain.SapSystem do
         system_replication == "Secondary"
       end)
 
-    IO.inspect("has_primary? #{has_primary?}")
-    IO.inspect("has_secondary? #{has_secondary?}")
-    IO.inspect(instances)
-
     if has_secondary? and !has_primary? do
-      IO.inspect("trigger full db deregister")
-
       [
         %DatabaseDeregistered{
           sap_system_id: sap_system_id,
