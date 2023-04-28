@@ -826,15 +826,12 @@ defmodule Trento.Domain.SapSystem do
   defp maybe_emit_database_deregistered_event(
          %SapSystem{
            sap_system_id: sap_system_id,
-           database:
-             %Database{
-               instances: instances
-             } = database
+           database: %Database{
+             instances: nil
+           }
          },
          deregistered_at
        ) do
-    #  when is_nil(database) or length(instances) == 0 do
-    IO.inspect("NO DB instances left, deregistering complete db")
     %DatabaseDeregistered{sap_system_id: sap_system_id, deregistered_at: deregistered_at}
   end
 
