@@ -1201,7 +1201,8 @@ defmodule Trento.SapSystemTest do
             :database_instance_registered_event,
             sap_system_id: sap_system_id,
             host_id: host_id,
-            instance_number: instance_number
+            instance_number: instance_number,
+            system_replication: nil
           )
         ],
         %DeregisterDatabaseInstance{
@@ -1286,23 +1287,17 @@ defmodule Trento.SapSystemTest do
             instance_number: instance_number_1,
             deregistered_at: deregistered_at
           },
-          # %DatabaseInstanceDeregistered{
-          #   sap_system_id: sap_system_id,
-          #   host_id: secondary_database_host_id,
-          #   instance_number: instance_number_2,
-          #   deregistered_at: deregistered_at
-          # },
-          # %ApplicationInstanceDeregistered{
-          #   sap_system_id: sap_system_id,
-          #   host_id: application_host_id,
-          #   instance_number: application_instance_number,
-          #   deregistered_at: deregistered_at
-          # },
-          %SapSystemDeregistered{
+          %DatabaseDeregistered{
             sap_system_id: sap_system_id,
             deregistered_at: deregistered_at
           },
-          %DatabaseDeregistered{
+          %DatabaseInstanceDeregistered{
+            sap_system_id: sap_system_id,
+            host_id: secondary_database_host_id,
+            instance_number: instance_number_2,
+            deregistered_at: deregistered_at
+          },
+          %SapSystemDeregistered{
             sap_system_id: sap_system_id,
             deregistered_at: deregistered_at
           }
@@ -1310,7 +1305,9 @@ defmodule Trento.SapSystemTest do
         fn sap_system ->
           assert %SapSystem{
                    database: nil,
-                   application: nil,
+                   application: %Application{
+                     instances: [%Instance{instance_number: ^application_instance_number}]
+                   },
                    deregistered_at: ^deregistered_at
                  } = sap_system
         end
