@@ -5,14 +5,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.29.0">
-    <meta name="project" content="Trento Web v1.2.0">
+    <meta name="project" content="Trento Web v2.1.0">
 
-    <title>Trento.Integration.Checks.Gen — Trento Web v1.2.0</title>
+    <title>TrentoWeb.OpenApi.V1.ApiSpec — Trento Web v2.1.0</title>
     <link rel="stylesheet" href="dist/html-elixir-2YOS5DIE.css" />
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
-    <script src="dist/sidebar_items-B6FCE26C.js"></script>
+    <script src="dist/sidebar_items-5C01AB8E.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -20,7 +20,7 @@
 
 
   </head>
-  <body data-type="modules" class="page-behaviour">
+  <body data-type="modules" class="page-module">
     <script>
 
       try {
@@ -71,7 +71,7 @@
 Trento Web
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v1.2.0
+        v2.1.0
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -101,95 +101,22 @@ Trento Web
 </button>
 
 
-    <a href="https://github.com/trento-project/web/blob/main/lib/trento/application/integration/checks/adapter/gen.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/openapi/v1/api_spec.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Trento.Integration.Checks.Gen</span> <small>behaviour</small>
-  <small class="app-vsn" translate="no">(Trento Web v1.2.0)</small>
+  <span translate="no">TrentoWeb.OpenApi.V1.ApiSpec</span> 
+  <small class="app-vsn" translate="no">(Trento Web v2.1.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Behaviour of a check adapter.</p>
+<p>OpenApi specification entry point for V1 version</p>
   </section>
 
 
-  <section id="summary" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#summary">
-        <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
-      </a>
-      Summary
-    </h1>
-
-  <div class="summary-callbacks summary">
-    <h2>
-      <a href="#callbacks">Callbacks</a>
-    </h2>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#c:request_execution/5" translate="no">request_execution(execution_id, cluster_id, provider, hosts_settings, checks)</a>
-
-        </div>
-
-      </div>
-
-  </div>
-
-  </section>
-
-
-  <section id="callbacks" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#callbacks">
-        <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
-      </a>
-Callbacks
-    </h1>
-    <div class="callbacks-list">
-<section class="detail" id="c:request_execution/5">
-
-  <div class="detail-header">
-    <a href="#c:request_execution/5" class="detail-link" title="Link to this callback">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this callback</span>
-    </a>
-    <h1 class="signature" translate="no">request_execution(execution_id, cluster_id, provider, hosts_settings, checks)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/application/integration/checks/adapter/gen.ex#L12" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@callback</span> request_execution(
-  execution_id :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
-  cluster_id :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
-  provider :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(),
-  hosts_settings :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()],
-  checks :: [<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()]
-) :: :ok | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
-
-      </div>
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
 
       <footer class="footer">
 
