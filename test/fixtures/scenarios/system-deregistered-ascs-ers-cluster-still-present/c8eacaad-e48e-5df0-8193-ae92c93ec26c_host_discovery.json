@@ -1,0 +1,1 @@
+{"agent_id":"c8eacaad-e48e-5df0-8193-ae92c93ec26c","discovery_type":"host_discovery","payload":{"agent_version":"2.1.0","cpu_count":2,"hostname":"vmnwqas02","installation_source":"Suse","ip_addresses":["127.0.0.1","::1","10.90.1.22","10.90.1.25","fe80::20d:3aff:fe22:e720"],"os_version":"15-SP4","socket_count":1,"total_memory_mb":7942}}

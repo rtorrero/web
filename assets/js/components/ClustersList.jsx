@@ -5,6 +5,7 @@ import Tags from '@components/Tags';
 import PageHeader from '@components/PageHeader';
 import { addTagToCluster, removeTagFromCluster } from '@state/clusters';
 import ClusterLink from '@components/ClusterLink';
+import SapSystemLink from '@components/SapSystemLink';
 import { ExecutionIcon } from '@components/ClusterDetails';
 import { post, del } from '@lib/network';
 import { useSearchParams } from 'react-router-dom';
@@ -24,6 +25,21 @@ const getClusterTypeLabel = (type) => {
   }
 };
 
+const getSapSystemLinkBySID = (applicationInstances, databaseInstances, sid) => {
+  const getInstancesBySID = (applicationInstances, databaseInstances, sid) => {
+    const foundInstance = applicationInstances
+      .map((instance) => ({ ...instance, type: 'sap_systems' }))
+      .concat(
+        databaseInstances.map((instance) => ({
+          ...instance,
+          type: 'databases',
+        }))
+      )
+      .find((instance) => instance.sid === sid);
+  
+    return foundInstance ? { sap_system_id: foundInstance.sap_system_id, type: foundInstance.type } : null;
+  };
+
 const addTag = (tag, clusterId) => {
   post(`/clusters/${clusterId}/tags`, {
     value: tag,
@@ -36,6 +52,8 @@ const removeTag = (tag, clusterId) => {
 
 function ClustersList() {
   const clusters = useSelector((state) => state.clustersList.clusters);
+  const { applicationInstances } = useSelector((state) => state.sapSystemsList);
+  const { databaseInstances } = useSelector((state) => state.databasesList);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -71,7 +89,19 @@ function ClustersList() {
         filterFromParams: true,
         filter: (filter, key) => (element) =>
           element[key].some((sid) => filter.includes(sid)),
-        render: (_, { sid }) => sid.join(', '),
+        render: (_, { sid }) => {
+          return sid.map((singleSid, index) => {
+            const linkData = getSapSystemLinkBySID(applicationInstances, databaseInstances, singleSid);
+        
+            return (
+              <SapSystemLink 
+                key={index} // You should include a unique key when mapping in React
+                systemType={linkData.type}
+                sapSystemId={linkData.sap_system_id}
+              />
+            );
+          });
+        },
       },
       {
         title: 'Hosts',

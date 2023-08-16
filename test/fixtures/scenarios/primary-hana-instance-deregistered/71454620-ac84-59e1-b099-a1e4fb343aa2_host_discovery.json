@@ -1,0 +1,1 @@
+{"agent_id":"71454620-ac84-59e1-b099-a1e4fb343aa2","discovery_type":"host_discovery","payload":{"agent_version":"2.1.0","cpu_count":20,"hostname":"vms4cs","installation_source":"Suse","ip_addresses":["127.0.0.1","::1","10.120.0.4","fe80::20d:3aff:fe25:9af2"],"os_version":"15-SP3","socket_count":1,"total_memory_mb":160983}}

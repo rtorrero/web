@@ -1,0 +1,1 @@
+{"agent_id":"2372b24f-3d7a-5d01-9b1a-a2c4c95c53d4","discovery_type":"sap_system_discovery","payload":[{"DBAddress":"","Databases":null,"Id":"-","Instances":[],"Profile":{"HDB_LINKED_BINARIES":"yes","HDB_SHARED_BINARIES":"yes","SAPGLOBALHOST":"vmhdbqas02","SAPSYSTEMNAME":"HDQ","hdbConfigType":"DEFAULT","ssl/ciphersuites":"135:PFS:HIGH::EC_P256:EC_HIGH"},"SID":"HDQ","Type":0}]}

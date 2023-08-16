@@ -1,0 +1,1 @@
+{"agent_id":"06c303a8-b205-5670-a170-7a98af87aa5a","discovery_type":"host_discovery","payload":{"agent_version":"2.1.0","cpu_count":1,"hostname":"vmiscsi01","installation_source":"Suse","ip_addresses":["127.0.0.1","::1","10.90.1.4","fe80::20d:3aff:fe25:3a20"],"os_version":"15-SP4","socket_count":1,"total_memory_mb":3412}}

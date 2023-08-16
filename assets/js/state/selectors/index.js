@@ -26,6 +26,9 @@ const enrichInstances = (instances, sapSystemId, state) =>
       };
     });
 
+export const getAllSapSystems = (state) =>
+  state.sapSystemsList.sapSystems.map(keysToCamel);
+
 export const getSapSystem = (id) => (state) =>
   state.sapSystemsList.sapSystems.find((sapSystem) => id === sapSystem.id);
 

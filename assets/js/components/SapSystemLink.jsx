@@ -1,8 +1,11 @@
 import React from 'react';
+import { EOS_WARNING_OUTLINED } from 'eos-icons-react';
 
+import Tooltip from '@components/Tooltip';
 import { Link } from 'react-router-dom';
 
 function SapSystemLink({ systemType, sapSystemId, children }) {
+  console.log('SAP SYSTEM LINK COMPONENT:', systemType, sapSystemId, children);
   return sapSystemId ? (
     <Link
       key={sapSystemId}
@@ -12,7 +15,15 @@ function SapSystemLink({ systemType, sapSystemId, children }) {
       {children}
     </Link>
   ) : (
-    <span>{children}</span>
+    <Tooltip content="SAP System currently not registered." place="bottom">
+      <span className="group flex items-center relative">
+        <EOS_WARNING_OUTLINED
+          size="base"
+          className="centered fill-yellow-500"
+        />
+        <span className="ml-1 truncate max-w-[100px]">{children}</span>
+      </span>
+    </Tooltip>
   );
 }
 
