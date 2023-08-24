@@ -3,6 +3,7 @@ import {
   SAP_SYSTEM_REGISTERED,
   SAP_SYSTEM_HEALTH_CHANGED,
   APPLICATION_INSTANCE_REGISTERED,
+  APPLICATION_INSTANCE_MARKED_ABSENT,
   APPLICATION_INSTANCE_MOVED,
   APPLICATION_INSTANCE_HEALTH_CHANGED,
   APPLICATION_INSTANCE_DEREGISTERED,
@@ -46,6 +47,10 @@ function* sapSystemHealthChanged({ payload }) {
 }
 
 function* applicationInstanceRegistered({ payload }) {
+  yield put(upsertApplicationInstances([payload]));
+}
+
+function* applicationInstanceMarkedAbsent({ payload }) {
   yield put(upsertApplicationInstances([payload]));
 }
 
@@ -113,6 +118,10 @@ export function* watchSapSystem() {
   yield takeEvery(
     APPLICATION_INSTANCE_REGISTERED,
     applicationInstanceRegistered
+  );
+  yield takeEvery(
+    APPLICATION_INSTANCE_MARKED_ABSENT,
+    applicationInstanceMarkedAbsent
   );
   yield takeEvery(APPLICATION_INSTANCE_MOVED, applicationInstanceMoved);
   yield takeEvery(
