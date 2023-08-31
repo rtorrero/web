@@ -33,6 +33,9 @@ export function GenericSystemDetails({ title, type, system }) {
     return <div>Not Found</div>;
   }
 
+  //TODO: REMOVE THIS
+  system.instances[1].absent_at = '2021-09-01T14:00:00.000Z';
+  console.log('System is:', system);
   return (
     <div>
       <PageHeader className="font-bold">{title}</PageHeader>

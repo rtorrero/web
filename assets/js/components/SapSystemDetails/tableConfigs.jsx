@@ -2,6 +2,7 @@ import React from 'react';
 
 import HostLink from '@components/HostLink';
 import ProviderLabel from '@components/ProviderLabel';
+import CleanUpButton from '@components/CleanUpButton';
 
 import Features from './Features';
 import InstanceStatus from './InstanceStatus';
@@ -23,6 +24,24 @@ export const systemInstancesTableConfiguration = {
       title: 'Status',
       key: 'health',
       render: (content) => <InstanceStatus health={content} />,
+    },
+    {
+      title: '',
+      key: 'absent_at',
+      render: (content) => {
+        console.log('content', content);
+        if (content) {
+          return (
+            <CleanUpButton
+              size="fit"
+              type="transparent"
+              className="jungle-green-500 border-none shadow-none"
+            />
+          );
+        } else {
+          return null;
+        }
+      },
     },
   ],
 };
