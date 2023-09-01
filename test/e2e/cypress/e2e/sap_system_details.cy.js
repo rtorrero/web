@@ -60,8 +60,8 @@ context('SAP system details', () => {
         cy.get('@tableCell').eq(6).should('contain', instance.Status);
         cy.get('@tableCell')
           .eq(6)
-          .find('span')
-          .should('have.class', healthMap[instance.StatusBadge]);
+          .find('svg')
+          .should('have.class', healthMap[instance.Status]);
       });
     });
 
@@ -75,8 +75,8 @@ context('SAP system details', () => {
           .eq(3)
           .find('td')
           .as('tableCell');
-        cy.get('@tableCell').eq(6).should('contain', `SAPControl-${state}`);
-        cy.get('@tableCell').eq(6).find('span').should('have.class', health);
+        cy.get('@tableCell').eq(6).should('contain', `${state}`);
+        cy.get('@tableCell').eq(6).find('svg').should('have.class', health);
       });
     });
     /* This test is commented because there is not any option to remove added SAP instances or
