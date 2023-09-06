@@ -6,6 +6,7 @@ import ProviderLabel from '@components/ProviderLabel';
 import CleanUpButton from '@components/CleanUpButton';
 import Tooltip from '@components/Tooltip';
 import HealthIcon from '@components/Health';
+import DeregistrationModal from '@components/DeregistrationModal';
 
 import Features from './Features';
 import InstanceStatus from './InstanceStatus';
@@ -15,6 +16,9 @@ const cellRender = (content, item) => (
     {content}
   </span>
 );
+
+const [cleanUpModalOpen, setCleanUpModalOpen] = useState(false);
+const [instanceToDeregister, setInstanceToDeregister] = useState(undefined);
 
 export const systemInstancesTableConfiguration = {
   usePadding: false,
@@ -71,12 +75,14 @@ export const systemInstancesTableConfiguration = {
       title: '',
       key: 'absent_at',
       className: 'w-40',
-      render: (content, _item) =>
+      render: (content, item) =>
         content && (
           <CleanUpButton
             size="fit"
             type="transparent"
             className="jungle-green-500 border-none shadow-none"
+            cleaning={item.deregistering}
+            onClick={}
           />
         ),
     },
