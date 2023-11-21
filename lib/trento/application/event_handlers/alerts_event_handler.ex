@@ -8,11 +8,12 @@ defmodule Trento.AlertsEventHandler do
     name: "alerts_event_handler"
 
   alias Trento.Domain.Events.{
-    ClusterHealthChanged,
     DatabaseHealthChanged,
     HostHealthChanged,
     SapSystemHealthChanged
   }
+
+  alias Trento.Clusters.Events.ClusterHealthChanged
 
   alias Trento.Application.UseCases.Alerting
 

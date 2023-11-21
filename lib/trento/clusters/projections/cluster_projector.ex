@@ -19,7 +19,7 @@ defmodule Trento.ClusterProjector do
     ClusterRestored
   }
 
-  alias Trento.ClusterReadModel
+  alias Trento.Clusters.Projections.ClusterReadModel
 
   alias Trento.Repo
 

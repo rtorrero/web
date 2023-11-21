@@ -14,29 +14,31 @@ defmodule Trento.StreamRollUpEventHandler do
     name: "stream_roll_up_event_handler"
 
   alias Trento.Domain.Commands.{
-    RollUpCluster,
     RollUpHost,
     RollUpSapSystem
   }
 
+  alias Trento.Clusters.Commands.RollUpCluster
+
   alias Trento.Domain.Events.{
-    ClusterTombstoned,
     HostTombstoned,
     SapSystemTombstoned
   }
+
+  alias Trento.Clusters.Events.ClusterTomstoned
 
   require Logger
 
   @max_stream_version Application.compile_env!(:trento, [__MODULE__, :max_stream_version])
 
   @cluster_events [
-    Trento.Domain.Events.ChecksSelected,
-    Trento.Domain.Events.ClusterChecksHealthChanged,
-    Trento.Domain.Events.ClusterDetailsUpdated,
-    Trento.Domain.Events.ClusterDiscoveredHealthChanged,
-    Trento.Domain.Events.ClusterHealthChanged,
-    Trento.Domain.Events.ClusterRegistered,
-    Trento.Domain.Events.HostAddedToCluster
+    Trento.Clusters.Events.ChecksSelected,
+    Trento.Clusters.Events.ClusterChecksHealthChanged,
+    Trento.Clusters.Events.ClusterDetailsUpdated,
+    Trento.Clusters.Events.ClusterDiscoveredHealthChanged,
+    Trento.Clusters.Events.ClusterHealthChanged,
+    Trento.Clusters.Events.ClusterRegistered,
+    Trento.Clusters.Events.HostAddedToCluster
   ]
 
   @host_events [

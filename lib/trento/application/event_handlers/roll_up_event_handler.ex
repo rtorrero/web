@@ -12,12 +12,15 @@ defmodule Trento.RollUpEventHandler do
   alias Trento.RollUp
 
   alias Trento.Domain.Events.{
-    ClusterRolledUp,
-    ClusterRollUpRequested,
     HostRolledUp,
     HostRollUpRequested,
     SapSystemRolledUp,
     SapSystemRollUpRequested
+  }
+
+  alias Trento.Clusters.Events.{
+    ClusterRolledUp,
+    ClusterRollUpRequested
   }
 
   def handle(
