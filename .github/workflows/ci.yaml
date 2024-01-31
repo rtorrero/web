@@ -746,7 +746,7 @@ jobs:
       - name: Set version
         run: |
           git config --global --add safe.directory /__w/web/web
-          VERSION=$(./hack/get_version_from_git.sh)
+          VERSION=2.2.0+git.dev218.1706706104.b426333e8
           sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER_RPM
       - name: Commit on OBS
         run: |
