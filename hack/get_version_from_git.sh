@@ -3,6 +3,7 @@ set -x
 set -e
 set -o pipefail
 
+echo $( git tag )
 TAG=$( git tag | grep -E "[0-9]\.[0-9]\.[0-9]" | sort -rn | head -n1 )
 
 if [ -n "${TAG}" ]; then
