@@ -735,10 +735,17 @@ jobs:
           /scripts/init_osc_creds.sh
       - name: prepare _service file
         run: |
+          set -x
+          echo  "1"
           git config --global --add safe.directory /__w/web/web
+          echo  "2"
           VERSION=$(./hack/get_version_from_git.sh)
+          echo  "3"
           sed -i 's~%%REVISION%%~${{ github.sha }}~' $FOLDER_RPM/_service && \
+          echo  "4"
           sed -i 's~%%REPOSITORY%%~${{ github.repository }}~' $FOLDER_RPM/_service && \
+          echo "5"
           sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER_RPM/_service
+          echo "6"
       - name: submit package
         run: /scripts/submit.sh
