@@ -734,15 +734,15 @@ jobs:
           cp /home/osc/.config/osc/oscrc $HOME/.config/osc
           /scripts/init_osc_creds.sh
       - name: Prepare .changes file
-          # The .changes file is updated only in release creation. This current task should be improved
-          # in order to add the current rolling release notes
-          if: github.event_name == 'release'
-          run: |
-            CHANGES_FILE=trento-web.changes
-            osc checkout $OBS_PROJECT trento-web $CHANGES_FILE
-            mv $CHANGES_FILE $FOLDER_RPM
-            VERSION=${{ steps.latest-tag.outputs.tag }}
-            hack/gh_release_to_obs_changeset.py $REPOSITORY -a shap-staff@suse.de -t $VERSION -f $FOLDER_RPM/$CHANGES_FILE
+        # The .changes file is updated only in release creation. This current task should be improved
+        # in order to add the current rolling release notes
+        if: github.event_name == 'release'
+        run: |
+          CHANGES_FILE=trento-web.changes
+          osc checkout $OBS_PROJECT trento-web $CHANGES_FILE
+          mv $CHANGES_FILE $FOLDER_RPM
+          VERSION=${{ steps.latest-tag.outputs.tag }}
+          hack/gh_release_to_obs_changeset.py $REPOSITORY -a shap-staff@suse.de -t $VERSION -f $FOLDER_RPM/$CHANGES_FILE
       - name: Set version
         run: |
           git config --global --add safe.directory /__w/web/web
