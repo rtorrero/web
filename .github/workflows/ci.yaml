@@ -733,19 +733,27 @@ jobs:
           mkdir -p $HOME/.config/osc
           cp /home/osc/.config/osc/oscrc $HOME/.config/osc
           /scripts/init_osc_creds.sh
-      - name: prepare _service file
+      - name: Prepare .changes file
+          # The .changes file is updated only in release creation. This current task should be improved
+          # in order to add the current rolling release notes
+          if: github.event_name == 'release'
+          run: |
+            CHANGES_FILE=trento-web.changes
+            osc checkout $OBS_PROJECT trento-web $CHANGES_FILE
+            mv $CHANGES_FILE $FOLDER_RPM
+            VERSION=${{ steps.latest-tag.outputs.tag }}
+            hack/gh_release_to_obs_changeset.py $REPOSITORY -a shap-staff@suse.de -t $VERSION -f $FOLDER_RPM/$CHANGES_FILE
+      - name: Set version
         run: |
-          set -x
-          echo  "1"
           git config --global --add safe.directory /__w/web/web
-          echo  "2"
           VERSION=$(./hack/get_version_from_git.sh)
-          echo  "3"
-          sed -i 's~%%REVISION%%~${{ github.sha }}~' $FOLDER_RPM/_service && \
-          echo  "4"
-          sed -i 's~%%REPOSITORY%%~${{ github.repository }}~' $FOLDER_RPM/_service && \
-          echo "5"
-          sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER_RPM/_service
-          echo "6"
-      - name: submit package
-        run: /scripts/submit.sh
+          sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER_RPM
+      - name: Commit on OBS
+        run: |
+          OBS_PACKAGE=$OBS_PROJECT/trento-web
+          osc checkout $OBS_PACKAGE -o $DEST_FOLDER
+          cp -r $FOLDER_RPM/* $DEST_FOLDER
+          tar --transform 's,^./,/web/,' -zcvf $DEST_FOLDER/web.tar.gz --exclude=./.git ./*
+          cd $DEST_FOLDER
+          osc ar
+          osc commit -m "New development version of trento-web released"

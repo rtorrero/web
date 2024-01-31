@@ -17,7 +17,7 @@
 
 
 Name:           trento-web
-Version:        0
+Version:        %%VERSION%%
 Release:        0
 Summary:        Trento server component
 # FIXME: Select a correct license from https://github.com/openSUSE/spec-cleaner#spdx-licenses
