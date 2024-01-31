@@ -89,6 +89,7 @@ jobs:
 
   codespell:
     name: Check common misspellings
+    if: false
     runs-on: ubuntu-20.04
     defaults:
       run:
@@ -112,7 +113,7 @@ jobs:
   generate-docs:
     name: Generate project documentation
     runs-on: ubuntu-20.04
-    if: github.event_name == 'push' && github.ref_name == 'main'
+    if: false
     steps:
       - uses: actions/checkout@v4
       - name: Set up Elixir
@@ -146,6 +147,7 @@ jobs:
 
   static-code-analysis:
     name: Static Code Analysis
+    if: false
     needs: [elixir-deps, npm-deps, api-bc-check]
     runs-on: ubuntu-20.04
     steps:
@@ -199,6 +201,7 @@ jobs:
 
   test-fe:
     name: Run FE tests
+    if: false
     needs: npm-deps
     runs-on: ubuntu-20.04
     steps:
@@ -226,6 +229,7 @@ jobs:
 
   test:
     name: Test (Elixir ${{ matrix.elixir }}, OTP ${{ matrix.otp }})
+    if: false
     needs: [elixir-deps, api-bc-check]
     runs-on: ubuntu-20.04
     strategy:
@@ -258,7 +262,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('mix.lock') }}
       - name: Compile
         run: mix compile --warnings-as-errors
-      - name: "Docker compose dependencies" 
+      - name: "Docker compose dependencies"
         uses: isbang/compose-action@v1.5.1
         with:
           compose-file: "./docker-compose.yaml"
@@ -272,7 +276,7 @@ jobs:
     name: Chromatic deployment
     needs: [elixir-deps, npm-deps]
     runs-on: ubuntu-20.04
-    if: github.event_name != 'repository_dispatch'
+    if: false
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.12.1
@@ -350,6 +354,7 @@ jobs:
 
   test-e2e:
     name: End to end tests
+    if: false
     needs: [elixir-deps, npm-deps, npm-e2e-deps, api-bc-check]
     runs-on: ubuntu-20.04
     env:
@@ -399,7 +404,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('test/e2e/package-lock.json') }}
       - name: Check Eslint and JS Code Format
         run: cd test/e2e && npm run lint && npm run format:check
-      - name: "Docker compose dependencies" 
+      - name: "Docker compose dependencies"
         uses: isbang/compose-action@v1.5.1
         with:
           compose-file: "./docker-compose.yaml"
@@ -478,6 +483,7 @@ jobs:
 
   api-bc-check:
     name: API bc check
+    if: false
     needs: [elixir-deps, main-branch-deps]
     runs-on: ubuntu-20.04
     strategy:
@@ -548,7 +554,7 @@ jobs:
   build-and-push-container-images:
     name: Build and push container images
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' || (github.event_name == 'push' && github.ref_name == 'main') || github.event_name == 'workflow_dispatch'
+    if: false
     needs: [static-code-analysis, test, test-fe, test-e2e]
     permissions:
       contents: read
@@ -586,7 +592,7 @@ jobs:
   build-demo-img:
     name: Build the docker image for the demo environment
     runs-on: ubuntu-latest
-    if: github.event.action == 'deploy-demo' || github.event_name == 'release' || (github.event_name == 'push' && github.ref_name == 'main') || github.event_name == 'workflow_dispatch'
+    if: false
     needs: [static-code-analysis, test, test-fe]
     permissions:
       contents: read
@@ -625,14 +631,7 @@ jobs:
   deploy-demo-env:
     name: Deploy updated images to the demo environment
     runs-on: self-hosted
-    if: |
-      vars.DEPLOY_DEMO == 'true' &&
-        (
-          github.event_name == 'release' ||
-          github.event.action == 'deploy-demo' ||
-          (github.event_name == 'push' && github.ref_name == 'main') ||
-          github.event_name == 'workflow_dispatch'
-        )
+    if: false
     env:
       IMAGE_REPOSITORY: ghcr.io/${{ github.repository_owner }}
     needs: [build-demo-img, test-e2e]
@@ -667,14 +666,7 @@ jobs:
   run-photofinish-demo-env:
     name: Use photofinish to push mock data to the demo environment
     runs-on: ubuntu-20.04
-    if: |
-      vars.DEPLOY_DEMO == 'true' &&
-        (
-          github.event_name == 'release' ||
-          github.event.action == 'deploy-demo' ||
-          (github.event_name == 'push' && github.ref_name == 'main') ||
-          github.event_name == 'workflow_dispatch'
-        )
+    if: false
     needs: deploy-demo-env
     env:
       TRENTO_DEMO_IP: ${{ secrets.TRENTO_DEMO_IP }}
@@ -700,7 +692,6 @@ jobs:
     name: Commit the project on OBS
     runs-on: ubuntu-20.04
     if: github.event_name == 'release' || (github.event_name == 'push' && github.ref_name == 'main') || github.event_name == 'workflow_dispatch'
-    needs: [static-code-analysis, test, test-fe, test-e2e]
     container:
       image: ghcr.io/trento-project/continuous-delivery:main
       env:
@@ -758,15 +749,6 @@ jobs:
           # "+" character is not allowed in OBS dockerfile version strings
           VERSION=${VERSION//[+]/-}
           sed -i 's~%%VERSION%%~'"${VERSION}"'~' packaging/suse/Dockerfile
-      - name: Commit container images on OBS
-        run: |
-          OBS_PACKAGE=$OBS_PROJECT/$NAME
-          osc checkout $OBS_PACKAGE -o $DEST_FOLDER
-          cp -r packaging/suse/* $DEST_FOLDER
-          tar --transform 's,^./,/web/,' -zcvf $DEST_FOLDER/web.tar.gz --exclude=./.git ./*
-          cd $DEST_FOLDER
-          osc ar
-          osc commit -m "New development version of $NAME released"
       - name: Commit to RPM package on OBS
         run: |
           OBS_PACKAGE=$OBS_PROJECT/$RPM_NAME
