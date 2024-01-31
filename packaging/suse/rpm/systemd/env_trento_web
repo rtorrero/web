@@ -1,0 +1,11 @@
+AMQP_URL=amqp://trento_user:trento_user_password@host.docker.internal/vhost
+DATABASE_URL=ecto://trento_user:web_password@host.docker.internal/trento
+EVENTSTORE_URL=ecto://trento_user:web_password@host.docker.internal/trento_event_store
+ENABLE_ALERTING=false
+PROMETHEUS_URL=http://host.docker.internal:9090
+SECRET_KEY_BASE=zw/eHC77bbukYBwbkZFJb0YBCvZxqk27oYg816UyzshSo462a+pHe9D6/rj2WfdR
+ACCESS_TOKEN_ENC_SECRET=7Ymy+mnLAroB3a9q1Z0fMa7cb9HPjTin4ULVmHDlphCE3p7lidvmju143ksj5rZN
+REFRESH_TOKEN_ENC_SECRET=wnA562Bd00f40R4mfsZsP8lv5jhV+Psi4aFz1U0pwDo2bIX0j7iL7iw301ia8M+p
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=test1234
+ENABLE_API_KEY=true
