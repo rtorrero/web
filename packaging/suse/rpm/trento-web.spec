@@ -22,8 +22,8 @@ Release:        0
 Summary:        Trento server component
 # FIXME: Select a correct license from https://github.com/openSUSE/spec-cleaner#spdx-licenses
 License:        Apache-2.0
-URL:            https://www.trento-project.io
-Source:         https://github.com/trento-project/web/archive/refs/tags/%{version}.tar.gz
+URL:            https://github.com/trento-project/web
+Source:         web.tar.gz
 Group:          System/Monitoring
 BuildRequires:  elixir, elixir-hex, npm16, erlang-rebar3, git-core
 
@@ -49,13 +49,16 @@ mix release
 %install
 mkdir -p %{buildroot}/usr/lib/trento
 cp -a _build/prod/rel/trento %{buildroot}/usr/lib
-ln -s %{buildroot}/usr/lib/trento/bin/trento
+install -D -m 0644 packaging/suse/rpm/systemd/trento-web.service %{buildroot}%{_unitdir}/trento-web.service
+install -D -m 0600 packaging/suse/rpm/systemd/env_trento_web %{buildroot}/etc/trento/env_trento_web
 
 %post
 %postun
 
 %files
 /usr/lib/trento
+%{_unitdir}/trento-web.service
+/etc/trento/env_trento_web
 
 %license LICENSE
 %doc CHANGELOG.md README.md
