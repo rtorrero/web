@@ -27,6 +27,9 @@ Group:          System/Monitoring
 BuildRequires:  elixir, elixir-hex, npm16, erlang-rebar3, git-core
 
 %description
+Trento is an open cloud-native web application for SAP Applications administrators.
+
+Trento server collects all the data from the agents and exposes a Web UI to monitor, view and expose potential issues it found.
 
 %prep
 %autosetup -n web
@@ -41,7 +44,6 @@ export MIX_ENV=prod
 export MIX_HOME=/usr/bin
 export MIX_REBAR3=/usr/bin/rebar3
 export MIX_PATH=/usr/lib/elixir/lib/hex/ebin
-echo $LANG
 mix phx.digest
 mix release
 
@@ -51,8 +53,17 @@ cp -a _build/prod/rel/trento %{buildroot}/usr/lib
 install -D -m 0644 packaging/suse/rpm/systemd/trento-web.service %{buildroot}%{_unitdir}/trento-web.service
 install -D -m 0600 packaging/suse/rpm/systemd/env_trento_web %{buildroot}/etc/trento/env_trento_web
 
-%post
-%postun
+%pre  
+%service_add_pre trento-web.service  
+
+%post  
+%service_add_post trento-web.service  
+
+%preun  
+%service_del_preun trento-web.service  
+
+%postun  
+%service_del_postun trento-web.service  
 
 %files
 /usr/lib/trento
@@ -61,6 +72,6 @@ install -D -m 0600 packaging/suse/rpm/systemd/env_trento_web %{buildroot}/etc/tr
 /etc/trento/env_trento_web
 
 %license LICENSE
-%doc CHANGELOG.md README.md
+%doc README.md guides
 
 %changelog
