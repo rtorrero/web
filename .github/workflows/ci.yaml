@@ -705,8 +705,8 @@ jobs:
       matrix:
         include:
           - NAME: trento-web-image
-            FOLDER: packaging/suse
-            BUILD_STEPS_FILE: packaging/suse/Dockerfile
+            FOLDER: packaging/suse/container
+            BUILD_STEPS_FILE: packaging/suse/container/Dockerfile
           - NAME: trento-web
             FOLDER: packaging/suse/rpm
             BUILD_STEPS_FILE: packaging/suse/rpm/trento-web.spec
