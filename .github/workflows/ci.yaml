@@ -76,7 +76,7 @@ jobs:
           VERSION=$(./hack/get_version_from_git.sh)
           # "+" character is not allowed in OBS dockerfile version strings
           VERSION=${VERSION//[+]/-}
-          sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER/trento-web.spec
+          sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER/Dockerfile
       - name: Commit on OBS
         run: |
           OBS_PACKAGE=$OBS_PROJECT/$NAME
