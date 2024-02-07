@@ -21,7 +21,6 @@ jobs:
     name: Commit to OBS to generate container image
     runs-on: ubuntu-20.04
     if: github.event_name == 'release' || (github.event_name == 'push' && github.ref_name == 'main') || github.event_name == 'workflow_dispatch'
-    needs: [static-code-analysis, test, test-fe, test-e2e]
     container:
       image: ghcr.io/trento-project/continuous-delivery:main
       env:
