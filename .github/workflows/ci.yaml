@@ -93,6 +93,9 @@ jobs:
     container:
       image: ghcr.io/trento-project/continuous-delivery:main
       env:
+        OBS_USER: ${{ secrets.OBS_USER }}
+        OBS_PASS: ${{ secrets.OBS_PASS }}
+        OBS_PROJECT: ${{ secrets.OBS_PROJECT }}
         OSC_CHECKOUT_DIR: /tmp/trento-web-package
         REPOSITORY: ${{ github.repository }}
         FOLDER: packaging/suse/rpm
@@ -101,7 +104,7 @@ jobs:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.12.1
         with:
-          access_token: ${{ github.token }}    
+          access_token: ${{ github.token }}
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -112,7 +115,7 @@ jobs:
       - name: Install assets
         run: cd assets && npm install
       - name: Get mix deps
-        run: mix local.hex --force && mix deps.clean --all && mix deps.get          
+        run: mix local.hex --force && mix deps.clean --all && mix deps.get
       - name: configure OSC
         run: |
           mkdir -p $HOME/.config/osc
