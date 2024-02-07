@@ -1,5 +1,5 @@
 [Unit]
-Description=Trento web service
+Description=Trento Web service
 
 [Service]
 ExecStart=/usr/lib/trento/bin/trento start
