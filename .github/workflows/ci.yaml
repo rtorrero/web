@@ -789,39 +789,32 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Install assets
-        run: cd assets && npm install
-      - name: Get mix deps
-        run: mix local.hex --force && mix deps.clean --all && mix deps.get          
-      - name: configure OSC
+      - name: Configure OSC
         run: |
           mkdir -p $HOME/.config/osc
           cp /home/osc/.config/osc/oscrc $HOME/.config/osc
           /scripts/init_osc_creds.sh
-      - name: prepare _service file
+      - name: Prepare _service file
         run: |
           git config --global --add safe.directory /__w/web/web
           VERSION=$(./hack/get_version_from_git.sh)
           sed -i 's~%%REVISION%%~'"${REVISION}"'~' $FOLDER/_service && \
           sed -i 's~%%REPOSITORY%%~'"${REPOSITORY}"'~' $FOLDER/_service && \
           sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER/_service
-      - name: prepare elixir dependencies
+      - name: Get mix deps & prepare tarball
         run: |
          mix local.hex --force && mix deps.clean --all && mix deps.get
          tar --sort=name --owner=root:0 --group=root:0 --mtime='UTC 1970-01-01' -c deps | gzip -n > deps.tar.gz
-      - name: checkout and prepare OBS package
+      - name: Checkout and prepare OBS package
         run: |
           osc checkout $OBS_PROJECT trento-web -o $OSC_CHECKOUT_DIR
           cp $FOLDER/_service $OSC_CHECKOUT_DIR
+          cp $FOLDER/trento-web.spec $OSC_CHECKOUT_DIR
           rm -v $OSC_CHECKOUT_DIR/*.tar.gz
           pushd $OSC_CHECKOUT_DIR 
           osc service manualrun
           cp  /__w/web/web/deps.tar.gz .
-      - name: prepare trento-web.changes file
+      - name: Prepare trento-web.changes file
         # The .changes file is updated only in release creation. This current task should be improved
         # in order to add the current rolling release notes
         if: github.event_name == 'release'
@@ -830,7 +823,7 @@ jobs:
           VERSION=$(./hack/get_version_from_git.sh)
           TAG=$(echo $VERSION | cut -f1 -d+)
           hack/gh_release_to_obs_changeset.py $REPOSITORY -a shap-staff@suse.de -t $TAG -f $OSC_CHECKOUT_DIR/trento-web.changes
-      - name: commit changes into OBS
+      - name: Commit changes into OBS
         run: |
           pushd $OSC_CHECKOUT_DIR
           osc ar
