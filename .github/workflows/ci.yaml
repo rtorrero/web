@@ -774,6 +774,9 @@ jobs:
     container:
       image: ghcr.io/trento-project/continuous-delivery:main
       env:
+        OBS_USER: ${{ secrets.OBS_USER }}
+        OBS_PASS: ${{ secrets.OBS_PASS }}
+        OBS_PROJECT: ${{ secrets.OBS_PROJECT }}
         OSC_CHECKOUT_DIR: /tmp/trento-web-package
         REPOSITORY: ${{ github.repository }}
         FOLDER: packaging/suse/rpm
