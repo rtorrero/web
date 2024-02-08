@@ -22,7 +22,11 @@ Summary:        Trento server component
 # FIXME: Select a correct license from https://github.com/openSUSE/spec-cleaner#spdx-licenses
 License:        Apache-2.0
 URL:            https://github.com/trento-project/web
-Source:         web.tar.gz
+Source:         %{name}-%{version}.tar.gz
+Source1:        deps.tar.gz
+Source2:        package-lock.json
+Source3:        node_modules.spec.inc
+%include        %{_sourcedir}/node_modules.spec.inc
 Group:          System/Monitoring
 BuildRequires:  elixir, elixir-hex, npm16, erlang-rebar3, git-core
 
@@ -32,11 +36,16 @@ Trento is an open cloud-native web application for SAP Applications administrato
 Trento server collects all the data from the agents and exposes a Web UI to monitor, view and expose potential issues it found.
 
 %prep
-%autosetup -n web
+%autosetup -a1
+pushd assets
+local-npm-registry %{_sourcedir} install --include=dev --ignore-scripts
+popd
 
 %build
-npm run tailwind:build --prefix ./assets
-npm run build --prefix ./assets
+pushd assets
+npm run tailwind:build
+npm run build
+popd
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US:en
 export LC_ALL=en_US.UTF-8
@@ -51,7 +60,7 @@ mix release
 mkdir -p %{buildroot}/usr/lib/trento
 cp -a _build/prod/rel/trento %{buildroot}/usr/lib
 install -D -m 0644 packaging/suse/rpm/systemd/trento-web.service %{buildroot}%{_unitdir}/trento-web.service
-install -D -m 0600 packaging/suse/rpm/systemd/env_trento_web %{buildroot}/etc/trento/env_trento_web
+install -D -m 0600 packaging/suse/rpm/systemd/trento-web.example %{buildroot}/etc/trento/trento-web.example
 
 %pre  
 %service_add_pre trento-web.service  
@@ -69,7 +78,7 @@ install -D -m 0600 packaging/suse/rpm/systemd/env_trento_web %{buildroot}/etc/tr
 /usr/lib/trento
 %{_unitdir}/trento-web.service
 /etc/trento
-/etc/trento/env_trento_web
+/etc/trento/trento-web.example
 
 %license LICENSE
 %doc README.md guides

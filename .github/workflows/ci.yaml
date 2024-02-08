@@ -809,6 +809,10 @@ jobs:
           sed -i 's~%%REVISION%%~'"${REVISION}"'~' $FOLDER/_service && \
           sed -i 's~%%REPOSITORY%%~'"${REPOSITORY}"'~' $FOLDER/_service && \
           sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER/_service
+      - name: prepare elixir dependencies
+        run: |
+         mix local.hex --force && mix deps.clean --all && mix deps.get
+         tar --sort=name --owner=root:0 --group=root:0 --mtime='UTC 1970-01-01' -c deps | gzip -n > deps.tar.gz
       - name: checkout and prepare OBS package
         run: |
           osc checkout $OBS_PROJECT trento-web -o $OSC_CHECKOUT_DIR
@@ -816,6 +820,7 @@ jobs:
           rm -v $OSC_CHECKOUT_DIR/*.tar.gz
           pushd $OSC_CHECKOUT_DIR 
           osc service manualrun
+          cp  /__w/web/web/deps.tar.gz .
       - name: prepare trento-web.changes file
         # The .changes file is updated only in release creation. This current task should be improved
         # in order to add the current rolling release notes

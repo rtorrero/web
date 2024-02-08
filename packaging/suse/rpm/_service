@@ -5,6 +5,7 @@
         <param name="revision">%%REVISION%%</param>
         <param name="exclude">.git</param>
         <param name="exclude">.github</param>
+        <param name="exclude">assets/package-lock.json</param>
         <param name="versionformat">%%VERSION%%</param>
         <param name="filename">trento-web</param>
     </service>
@@ -14,5 +15,10 @@
     <service name="recompress" mode="manual">
         <param name="file">*.tar</param>
         <param name="compression">gz</param>
+    </service>
+    <service name="node_modules" mode="manual">
+        <param name="cpio">node_modules.obscpio</param>
+        <param name="output">node_modules.spec.inc</param>
+        <param name="source-offset">10000</param>
     </service>
 </services>
