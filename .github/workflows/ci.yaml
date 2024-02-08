@@ -798,7 +798,7 @@ jobs:
         run: |
           git config --global --add safe.directory /__w/web/web
           VERSION=$(./hack/get_version_from_git.sh)
-          sed -i 's~%%REVISION%%~'"${REVISION}"'~' $FOLDER/_service && \
+          sed -i 's~%%REVISION%%~${{ github.sha }}~' $FOLDER/_service && \
           sed -i 's~%%REPOSITORY%%~'"${REPOSITORY}"'~' $FOLDER/_service && \
           sed -i 's~%%VERSION%%~'"${VERSION}"'~' $FOLDER/_service
       - name: Get mix deps & prepare tarball
