@@ -6,7 +6,7 @@
         <param name="exclude">.git</param>
         <param name="exclude">.github</param>
         <param name="exclude">assets/package-lock.json</param>
-        <param name="exclude">assets/package-lock.json</param>
+        <param name="extract">assets/package-lock.json</param>
         <param name="versionformat">%%VERSION%%</param>
         <param name="filename">trento-web</param>
     </service>
