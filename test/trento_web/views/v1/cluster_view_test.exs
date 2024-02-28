@@ -32,7 +32,7 @@ defmodule TrentoWeb.V1.ClusterViewTest do
 
       cluster = build(:cluster, type: :hana_scale_up, details: details)
 
-      %{details: %{nodes: [node]} = details} =
+      %{details: %{nodes: [node], stopped_resources: [resource]} = details} =
         render(ClusterView, "cluster.json", %{cluster: cluster})
 
       refute Access.get(details, :sites)
@@ -40,6 +40,7 @@ defmodule TrentoWeb.V1.ClusterViewTest do
       refute Access.get(node, :nameserver_actual_role)
       refute Access.get(node, :indexserver_actual_role)
       refute Access.get(node, :status)
+      refute Access.key(resource, :managed)
     end
   end
 end

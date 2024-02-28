@@ -42,6 +42,8 @@ defmodule TrentoWeb.V1.ClusterView do
     %{cluster | details: adapted_details}
   end
 
+  defp adapt_v1(details: %{nodes: %{}})
+
   defp adapt_v1(cluster) do
     cluster
     |> Map.replace(:type, :unknown)
