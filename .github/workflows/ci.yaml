@@ -494,10 +494,10 @@ jobs:
           down-flags: "--volumes"
       - name: Import postgres snapshots
         run: |
-          createdb -h postgres -U postgres trento_regression_test
-          createdb -h postgres -U postgres trento_eventstore_regression_test
-          pg_restore -h postgres -U postgres -d trento_regression_test -c -1 ./trento_dev.dump
-          pg_restore -h postgres -U postgres -d trento_eventstore_regression_test -c -1 ./trento_eventstore_dev.dump
+          createdb -h localhost -p 5673 -U postgres trento_regression_test
+          createdb -h localhost -p 5673 -U postgres trento_eventstore_regression_test
+          pg_restore -h localhost -p 5673 -U postgres -d trento_regression_test -c -1 ./trento_dev.dump
+          pg_restore -h localhost -p 5673 -U postgres -d trento_eventstore_regression_test -c -1 ./trento_eventstore_dev.dump
       - name: Mix setup
         run: mix setup
       - name: Run trento detached
