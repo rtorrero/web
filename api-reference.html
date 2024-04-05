@@ -14,7 +14,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-43PMFBC7.js"></script>
-    <script src="dist/sidebar_items-9534B7AE.js"></script>
+    <script src="dist/sidebar_items-663C31E0.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -598,6 +598,226 @@ It contains the snapshot of the cluster aggregate that will be used to restore t
 
     <div class="summary-synopsis"><p>This module defines the setup for tests requiring
 access to the application's data layer.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.html" translate="no">Trento.Databases</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Provides a set of functions to interact with databases.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Commands.DeregisterDatabaseInstance.html" translate="no">Trento.Databases.Commands.DeregisterDatabaseInstance</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Deregister (decommission) a database instance from the monitoring system.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Commands.MarkDatabaseInstanceAbsent.html" translate="no">Trento.Databases.Commands.MarkDatabaseInstanceAbsent</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Mark a database instance as absent</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Commands.RegisterDatabaseInstance.html" translate="no">Trento.Databases.Commands.RegisterDatabaseInstance</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Register a database instance to the monitoring system.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Commands.RollUpDatabase.html" translate="no">Trento.Databases.Commands.RollUpDatabase</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Start a database aggregate rollup.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Database.html" translate="no">Trento.Databases.Database</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>The database aggregate manages all the domain logic related to
+deployed HANA database.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Event.Upcaster.UpcastDatabaseId.html" translate="no">Trento.Databases.Event.Upcaster.UpcastDatabaseId</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Adds the required upcast function to upcast from legacy events where
+sap_system_id was still used.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseDeregistered.html" translate="no">Trento.Databases.Events.DatabaseDeregistered</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted once all database instances belonging to a HANA database have been deregistered (decommissioned).</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseHealthChanged.html" translate="no">Trento.Databases.Events.DatabaseHealthChanged</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database health has changed.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseInstanceDeregistered.html" translate="no">Trento.Databases.Events.DatabaseInstanceDeregistered</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database instance is deregistered (decommissioned).</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseInstanceHealthChanged.html" translate="no">Trento.Databases.Events.DatabaseInstanceHealthChanged</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database instance health has changed.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseInstanceMarkedAbsent.html" translate="no">Trento.Databases.Events.DatabaseInstanceMarkedAbsent</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database instance is marked as absent.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseInstanceMarkedPresent.html" translate="no">Trento.Databases.Events.DatabaseInstanceMarkedPresent</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database instance is marked as present.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseInstanceRegistered.html" translate="no">Trento.Databases.Events.DatabaseInstanceRegistered</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database instance is registered.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseInstanceSystemReplicationChanged.html" translate="no">Trento.Databases.Events.DatabaseInstanceSystemReplicationChanged</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database instance system replication has changed.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseRegistered.html" translate="no">Trento.Databases.Events.DatabaseRegistered</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database is registered.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseRestored.html" translate="no">Trento.Databases.Events.DatabaseRestored</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database is restored.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseRollUpRequested.html" translate="no">Trento.Databases.Events.DatabaseRollUpRequested</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when an database roll-up is requested.
+It is used to trigger the stream archiving process and it contains the snapshot of the database aggregate.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseRolledUp.html" translate="no">Trento.Databases.Events.DatabaseRolledUp</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database roll-up is requested.
+It is used to trigger the stream archiving process and it contains the snapshot of the database aggregate.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Events.DatabaseTombstoned.html" translate="no">Trento.Databases.Events.DatabaseTombstoned</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a database is deregistered (decommissioned)</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Lifespan.html" translate="no">Trento.Databases.Lifespan</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Database aggregate lifespan.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Projections.DatabaseInstanceReadModel.html" translate="no">Trento.Databases.Projections.DatabaseInstanceReadModel</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Database instance read model</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Projections.DatabaseProjector.html" translate="no">Trento.Databases.Projections.DatabaseProjector</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Database projector</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Databases.Projections.DatabaseReadModel.html" translate="no">Trento.Databases.Projections.DatabaseReadModel</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Database read model</p></div>
 
 </div>
 <div class="summary-row">
@@ -1650,11 +1870,29 @@ tests that require setting an event store.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Trento.Hosts.Commands.ClearSoftwareUpdatesDiscovery.html" translate="no">Trento.Hosts.Commands.ClearSoftwareUpdatesDiscovery</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Clears the software updates discovery when its output is not needed anymore</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Trento.Hosts.Commands.CompleteHostChecksExecution.html" translate="no">Trento.Hosts.Commands.CompleteHostChecksExecution</a>
 
   </div>
 
     <div class="summary-synopsis"><p>Complete the checks execution with the incoming result</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Hosts.Commands.CompleteSoftwareUpdatesDiscovery.html" translate="no">Trento.Hosts.Commands.CompleteSoftwareUpdatesDiscovery</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Complete the software updates discovery with the detected info</p></div>
 
 </div>
 <div class="summary-row">
@@ -1895,6 +2133,24 @@ It contains the snapshot of the host aggregate that will be used to restore the 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Trento.Hosts.Events.SoftwareUpdatesDiscoveryCleared.html" translate="no">Trento.Hosts.Events.SoftwareUpdatesDiscoveryCleared</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a host's software updates discovery is cleared</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Hosts.Events.SoftwareUpdatesDiscoveryCompleted.html" translate="no">Trento.Hosts.Events.SoftwareUpdatesDiscoveryCompleted</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event is emitted when a host's software updates discovery process complete</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Trento.Hosts.Host.html" translate="no">Trento.Hosts.Host</a>
 
   </div>
@@ -1932,15 +2188,6 @@ It contains the snapshot of the host aggregate that will be used to restore the 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.Hosts.Projections.HostTelemetryReadModel.html" translate="no">Trento.Hosts.Projections.HostTelemetryReadModel</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>HostTelemetry read model</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="Trento.Hosts.Projections.SlesSubscriptionReadModel.html" translate="no">Trento.Hosts.Projections.SlesSubscriptionReadModel</a>
 
   </div>
@@ -1955,15 +2202,6 @@ It contains the snapshot of the host aggregate that will be used to restore the 
   </div>
 
     <div class="summary-synopsis"><p>Check result projector</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Trento.Hosts.Projections.TelemetryProjector.html" translate="no">Trento.Hosts.Projections.TelemetryProjector</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Telemetry projector</p></div>
 
 </div>
 <div class="summary-row">
@@ -1991,6 +2229,15 @@ It contains the snapshot of the host aggregate that will be used to restore the 
   </div>
 
     <div class="summary-synopsis"><p>Gcp provider value object</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Hosts.ValueObjects.RelevantPatches.html" translate="no">Trento.Hosts.ValueObjects.RelevantPatches</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Represents a host's relevant patches counts</p></div>
 
 </div>
 <div class="summary-row">
@@ -2121,6 +2368,26 @@ It contains the snapshot of the host aggregate that will be used to restore the 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Trento.Infrastructure.Commanded.EventHandlers.DatabaseDeregistrationEventHandler.html" translate="no">Trento.Infrastructure.Commanded.EventHandlers.DatabaseDeregistrationEventHandler</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event handler is responsible to forward deregistration commands to the SAP systems
+related to a deregistered database</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Infrastructure.Commanded.EventHandlers.DatabaseRestoreEventHandler.html" translate="no">Trento.Infrastructure.Commanded.EventHandlers.DatabaseRestoreEventHandler</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>This event handler is responsible to forward restore commands to the SAP systems
+related to a restored database</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Trento.Infrastructure.Commanded.EventHandlers.RollUpEventHandler.html" translate="no">Trento.Infrastructure.Commanded.EventHandlers.RollUpEventHandler</a>
 
   </div>
@@ -2169,7 +2436,7 @@ It contains the snapshot of the host aggregate that will be used to restore the 
 
   </div>
 
-    <div class="summary-synopsis"><p>An application or database instance and which SAP System it belongs to.</p></div>
+    <div class="summary-synopsis"><p>An application or database instance and which SAP System/Database it belongs to.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2274,39 +2541,47 @@ Chart time series objects</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.Infrastructure.Telemetry.html" translate="no">Trento.Infrastructure.Telemetry</a>
+    <a href="Trento.Infrastructure.SoftwareUpdates.MockSuma.html" translate="no">Trento.Infrastructure.SoftwareUpdates.MockSuma</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Telmetry service integration</p></div>
+    <div class="summary-synopsis"><p>Mocked SUMA Software updates discovery adapter</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.Infrastructure.Telemetry.Gen.html" translate="no">Trento.Infrastructure.Telemetry.Gen</a>
+    <a href="Trento.Infrastructure.SoftwareUpdates.Suma.html" translate="no">Trento.Infrastructure.SoftwareUpdates.Suma</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Behaviour of a telemetry adapter.</p></div>
+    <div class="summary-synopsis"><p>SUMA Software updates discovery adapter</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.Infrastructure.Telemetry.Suse.html" translate="no">Trento.Infrastructure.Telemetry.Suse</a>
+    <a href="Trento.Infrastructure.SoftwareUpdates.Suma.HttpExecutor.html" translate="no">Trento.Infrastructure.SoftwareUpdates.Suma.HttpExecutor</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Adapter for the SUSE telemetry service.</p></div>
+    <div class="summary-synopsis"><p>SUMA Http requests executor</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.Infrastructure.Telemetry.ToLogger.html" translate="no">Trento.Infrastructure.Telemetry.ToLogger</a>
+    <a href="Trento.Infrastructure.SoftwareUpdates.Suma.State.html" translate="no">Trento.Infrastructure.SoftwareUpdates.Suma.State</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Telemetry adapter that publishes telemetry data to the logs.
-Used in dev and test environments.</p></div>
+    <div class="summary-synopsis"><p>State for the SUMA Software Updates discovery adapter</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Infrastructure.SoftwareUpdates.SumaApi.html" translate="no">Trento.Infrastructure.SoftwareUpdates.SumaApi</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>SUMA API client supporting software updates discovery.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2348,16 +2623,7 @@ installed.</p></div>
 
   </div>
 
-    <div class="summary-synopsis"><p>Provides a set of functions to interact with SAP systems and HANA Databases.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Trento.SapSystems.Application.html" translate="no">Trento.SapSystems.Application</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>This module represents a SAP System application.</p></div>
+    <div class="summary-synopsis"><p>Provides a set of functions to interact with SAP systems.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2371,11 +2637,11 @@ installed.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.SapSystems.Commands.DeregisterDatabaseInstance.html" translate="no">Trento.SapSystems.Commands.DeregisterDatabaseInstance</a>
+    <a href="Trento.SapSystems.Commands.DeregisterSapSystem.html" translate="no">Trento.SapSystems.Commands.DeregisterSapSystem</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Deregister (decommission) a database instance from the monitoring system.</p></div>
+    <div class="summary-synopsis"><p>Deregister (decommission) a SAP System</p></div>
 
 </div>
 <div class="summary-row">
@@ -2389,15 +2655,6 @@ installed.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.SapSystems.Commands.MarkDatabaseInstanceAbsent.html" translate="no">Trento.SapSystems.Commands.MarkDatabaseInstanceAbsent</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Mark a database instance as absent</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="Trento.SapSystems.Commands.RegisterApplicationInstance.html" translate="no">Trento.SapSystems.Commands.RegisterApplicationInstance</a>
 
   </div>
@@ -2407,11 +2664,11 @@ installed.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.SapSystems.Commands.RegisterDatabaseInstance.html" translate="no">Trento.SapSystems.Commands.RegisterDatabaseInstance</a>
+    <a href="Trento.SapSystems.Commands.RestoreSapSystem.html" translate="no">Trento.SapSystems.Commands.RestoreSapSystem</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Register a database instance to the monitoring system.</p></div>
+    <div class="summary-synopsis"><p>Restore a previously deregistered SapSystem.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2421,15 +2678,6 @@ installed.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>Start a sap system aggregate rollup.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Trento.SapSystems.Database.html" translate="no">Trento.SapSystems.Database</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>This module represents a SAP System database.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2688,33 +2936,6 @@ It is used to trigger the stream archiving process and it contains the snapshot 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="Trento.SapSystems.Projections.DatabaseInstanceReadModel.html" translate="no">Trento.SapSystems.Projections.DatabaseInstanceReadModel</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Database instance read model</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Trento.SapSystems.Projections.DatabaseProjector.html" translate="no">Trento.SapSystems.Projections.DatabaseProjector</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Database projector</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="Trento.SapSystems.Projections.DatabaseReadModel.html" translate="no">Trento.SapSystems.Projections.DatabaseReadModel</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Database read model</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="Trento.SapSystems.Projections.SapSystemProjector.html" translate="no">Trento.SapSystems.Projections.SapSystemProjector</a>
 
   </div>
@@ -2738,8 +2959,7 @@ It is used to trigger the stream archiving process and it contains the snapshot 
   </div>
 
     <div class="summary-synopsis"><p>The SAP system aggregate manages all the domain logic related to
-deployed SAP systems, which are composed by a database and application layers.
-<strong>The HANA database is the only supported database type.</strong></p></div>
+deployed SAP systems, which is composed by the application layer.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2780,11 +3000,56 @@ deployed SAP systems, which are composed by a database and application layers.
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="Trento.Settings.ApiKeySettings.html" translate="no">Trento.Settings.ApiKeySettings</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>ApiKeySettings is the STI projection of api key related settings</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Settings.InstallationSettings.html" translate="no">Trento.Settings.InstallationSettings</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>InstallationSettings is the STI projection containing installation related settings</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="Trento.SoftwareUpdates.html" translate="no">Trento.SoftwareUpdates</a>
 
   </div>
 
     <div class="summary-synopsis"><p>Entry point for the software updates feature.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.SoftwareUpdates.Discovery.html" translate="no">Trento.SoftwareUpdates.Discovery</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Software updates integration service</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.SoftwareUpdates.Discovery.Gen.html" translate="no">Trento.SoftwareUpdates.Discovery.Gen</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Behaviour of the software updates discovery process.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.SoftwareUpdates.Enums.AdvisoryType.html" translate="no">Trento.SoftwareUpdates.Enums.AdvisoryType</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Enum representing possible advisory types.</p></div>
 
 </div>
 <div class="summary-row">
@@ -2830,6 +3095,15 @@ deployed SAP systems, which are composed by a database and application layers.
   </div>
 
     <div class="summary-synopsis"><p>Ecto Type that represents a JSONB payload that contains an array or a map.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="Trento.Support.Ecto.STI.html" translate="no">Trento.Support.Ecto.STI</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Helpers module for Single Table Inheritance in ecto schemas</p></div>
 
 </div>
 <div class="summary-row">
@@ -2959,7 +3233,9 @@ as controllers, views, channels and so on.</p></div>
 
   </div>
 
-    <div class="summary-synopsis"><p>This Module creates and verifies API Keys.</p></div>
+    <div class="summary-synopsis"><p>ApiKey is the module responsible for creating a proper jwt api token used for accessing the api token protected resource.
+The token uses the same signer as app access token
+Uses Joken as jwt base library</p></div>
 
 </div>
 <div class="summary-row">
@@ -3167,6 +3443,16 @@ tests that require setting up a connection.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="TrentoWeb.Plugs.AppJWTAuthPlug.html" translate="no">TrentoWeb.Plugs.AppJWTAuthPlug</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>  The AppJWTAuthPlug is a Pow compatible authorization flow.
+  Handles the login and the credentials recovery at each request</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="TrentoWeb.Plugs.AuthenticateAPIKeyPlug.html" translate="no">TrentoWeb.Plugs.AuthenticateAPIKeyPlug</a>
 
   </div>
@@ -3181,16 +3467,6 @@ tests that require setting up a connection.</p></div>
   </div>
 
     <div class="summary-synopsis"><p>  This plug acts as a barrier for the charts endpoint, return 501 for all the requests.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="TrentoWeb.Plugs.JWTAuthPlug.html" translate="no">TrentoWeb.Plugs.JWTAuthPlug</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>  The JWTAuthPlug is a Pow compatible authorization flow.
-  Handles the login and the credentials recovery at each request</p></div>
 
 </div>
 <div class="summary-row">
@@ -3281,6 +3557,20 @@ tests that require setting up a connection.</p></div>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="TrentoWeb.V1.DatabaseController.html" translate="no">TrentoWeb.V1.DatabaseController</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TrentoWeb.V1.DatabaseView.html" translate="no">TrentoWeb.V1.DatabaseView</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="TrentoWeb.V1.DiscoveryController.html" translate="no">TrentoWeb.V1.DiscoveryController</a>
 
   </div>
@@ -3352,6 +3642,20 @@ tests that require setting up a connection.</p></div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="TrentoWeb.V1.SUMACredentialsView.html" translate="no">TrentoWeb.V1.SUMACredentialsView</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TrentoWeb.V1.SUSEManagerController.html" translate="no">TrentoWeb.V1.SUSEManagerController</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="TrentoWeb.V1.SUSEManagerView.html" translate="no">TrentoWeb.V1.SUSEManagerView</a>
 
   </div>
 

@@ -8,13 +8,13 @@
     <meta name="project" content="Trento Web v2.2.0">
 
 
-    <title>TrentoWeb.Plugs.JWTAuthPlug — Trento Web v2.2.0</title>
+    <title>Trento.Databases.Events.DatabaseInstanceDeregistered — Trento Web v2.2.0</title>
     <link rel="stylesheet" href="dist/html-elixir-FM2CSD74.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-43PMFBC7.js"></script>
-    <script src="dist/sidebar_items-9534B7AE.js"></script>
+    <script src="dist/sidebar_items-663C31E0.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -131,21 +131,19 @@ GUIDES
 
 <h1>
 
-    <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L1" title="View Source" class="icon-action" rel="help">
+    <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">TrentoWeb.Plugs.JWTAuthPlug</span> 
+  <span translate="no">Trento.Databases.Events.DatabaseInstanceDeregistered</span> 
   <small class="app-vsn" translate="no">(Trento Web v2.2.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>  The JWTAuthPlug is a Pow compatible authorization flow.
-  Handles the login and the credentials recovery at each request</p><p>  Uses Joken for jwt management</p><p>  See the pow documentation for further details.
-  <a href="https://hexdocs.pm/pow/Pow.Plug.Base.html">https://hexdocs.pm/pow/Pow.Plug.Base.html</a></p>
+<p>This event is emitted when a database instance is deregistered (decommissioned).</p>
   </section>
 
 
@@ -156,6 +154,20 @@ GUIDES
       </a>
       <span class="text">Summary</span>
     </h1>
+<div class="summary-types summary">
+  <h2>
+    <a href="#types">Types</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:t/0" translate="no">t()</a>
+
+      </div>
+
+    </div>
+
+</div>
 <div class="summary-functions summary">
   <h2>
     <a href="#functions">Functions</a>
@@ -163,82 +175,81 @@ GUIDES
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#call/2" translate="no">call(conn, config)</a>
+        <a href="#cast_and_validate_required_embed/3" translate="no">cast_and_validate_required_embed(changeset, field, required_fields)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Configures the connection for Pow, and fetches user.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#create/3" translate="no">create(conn, user, config)</a>
+        <a href="#cast_and_validate_required_polymorphic_embed/3" translate="no">cast_and_validate_required_polymorphic_embed(changeset, field, required_fields)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>  Generates the refresh and access token pairs from a User
-  The generated credentials will be stored in private section of the Plug.Conn struct</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#delete/2" translate="no">delete(conn, config)</a>
+        <a href="#changeset/2" translate="no">changeset(struct, params)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>  The authentication method is stateles, this is a no-op. Need that to satisfy Pow library</p></div>
+        <div class="summary-synopsis"><p>Casts the fields by using Ecto reflection,
+validates the required ones and returns a changeset.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#do_create/3" translate="no">do_create(conn, user, config)</a>
+        <a href="#new/1" translate="no">new(structs)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Calls <a href="#create/3"><code class="inline">create/3</code></a> and assigns the current user.</p></div>
+        <div class="summary-synopsis"><p>Returns an ok tuple if the params are valid, otherwise returns <code class="inline">{:error, {:validation, errors}}</code>.
+Accepts a map or a list of maps.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#do_delete/2" translate="no">do_delete(conn, config)</a>
+        <a href="#new!/1" translate="no">new!(params)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Calls <a href="#delete/2"><code class="inline">delete/2</code></a> and removes the current user assigned to the conn.</p></div>
+        <div class="summary-synopsis"><p>Returns new struct(s) if the params are valid, otherwise raises a <a href="https://hexdocs.pm/elixir/RuntimeError.html"><code class="inline">RuntimeError</code></a>.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#do_fetch/2" translate="no">do_fetch(conn, config)</a>
+        <a href="#supersede/1" translate="no">supersede(params)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>Calls <a href="#fetch/2"><code class="inline">fetch/2</code></a> and assigns the current user to the conn.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#fetch/2" translate="no">fetch(conn, config)</a>
+        <a href="#upcast/2" translate="no">upcast(params, metadata)</a>
 
       </div>
-
-        <div class="summary-synopsis"><p>  Read, validate and decode the JWT from authorization header at each call</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#renew/2" translate="no">renew(conn, refresh_token)</a>
+        <a href="#upcast/3" translate="no">upcast(params, _, int)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Creates new tokens using the refresh token.</p></div>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#validate_required_fields/2" translate="no">validate_required_fields(changeset, required_fields)</a>
+
+      </div>
 
     </div>
 
@@ -247,185 +258,24 @@ GUIDES
   </section>
 
 
-  <section id="functions" class="details-list">
+  <section id="types" class="details-list">
     <h1 class="section-heading">
-      <a class="hover-link" href="#functions">
+      <a class="hover-link" href="#types">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
-      <span class="text">Functions</span>
+      <span class="text">Types</span>
     </h1>
-    <div class="functions-list">
-<section class="detail" id="call/2">
+    <div class="types-list">
+<section class="detail" id="t:t/0">
 
   <div class="detail-header">
-    <a href="#call/2" class="detail-link" title="Link to this function">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
       <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
+      <span class="sr-only">Link to this type</span>
     </a>
-    <h1 class="signature" translate="no">call(conn, config)</h1>
+    <h1 class="signature" translate="no">t()</h1>
 
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L11" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Configures the connection for Pow, and fetches user.</p><p>If no options have been passed to the plug, the existing configuration
-will be pulled with <a href="https://hexdocs.pm/pow/1.0.28/Pow.Plug.html#fetch_config/1"><code class="inline">Pow.Plug.fetch_config/1</code></a></p><p><code class="inline">:plug</code> is appended to the passed configuration, so the current plug will
-be used in any subsequent calls to create, update and delete user
-credentials from the connection. The configuration is then set for the
-conn with <a href="https://hexdocs.pm/pow/1.0.28/Pow.Plug.html#put_config/2"><code class="inline">Pow.Plug.put_config/2</code></a>.</p><p>If a user can't be fetched with <a href="https://hexdocs.pm/pow/1.0.28/Pow.Plug.html#current_user/2"><code class="inline">Pow.Plug.current_user/2</code></a>, <a href="#do_fetch/2"><code class="inline">do_fetch/2</code></a>
-will be called.</p>
-  </section>
-</section>
-<section class="detail" id="create/3">
-
-  <div class="detail-header">
-    <a href="#create/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">create(conn, user, config)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L42" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>  Generates the refresh and access token pairs from a User
-  The generated credentials will be stored in private section of the Plug.Conn struct</p>
-  </section>
-</section>
-<section class="detail" id="delete/2">
-
-  <div class="detail-header">
-    <a href="#delete/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">delete(conn, config)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L86" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>  The authentication method is stateles, this is a no-op. Need that to satisfy Pow library</p>
-  </section>
-</section>
-<section class="detail" id="do_create/3">
-
-  <div class="detail-header">
-    <a href="#do_create/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">do_create(conn, user, config)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L11" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Calls <a href="#create/3"><code class="inline">create/3</code></a> and assigns the current user.</p><p>The user is assigned to the conn with <a href="https://hexdocs.pm/pow/1.0.28/Pow.Plug.html#assign_current_user/3"><code class="inline">Pow.Plug.assign_current_user/3</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="do_delete/2">
-
-  <div class="detail-header">
-    <a href="#do_delete/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">do_delete(conn, config)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L11" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Calls <a href="#delete/2"><code class="inline">delete/2</code></a> and removes the current user assigned to the conn.</p><p>The user assigned is removed from the conn with
-<a href="https://hexdocs.pm/pow/1.0.28/Pow.Plug.html#assign_current_user/3"><code class="inline">Pow.Plug.assign_current_user/3</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="do_fetch/2">
-
-  <div class="detail-header">
-    <a href="#do_fetch/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">do_fetch(conn, config)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L11" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Calls <a href="#fetch/2"><code class="inline">fetch/2</code></a> and assigns the current user to the conn.</p><p>The user is assigned to the conn with <a href="https://hexdocs.pm/pow/1.0.28/Pow.Plug.html#assign_current_user/3"><code class="inline">Pow.Plug.assign_current_user/3</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="fetch/2">
-
-  <div class="detail-header">
-    <a href="#fetch/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">fetch(conn, config)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L23" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>  Read, validate and decode the JWT from authorization header at each call</p>
-  </section>
-</section>
-<section class="detail" id="renew/2">
-
-  <div class="detail-header">
-    <a href="#renew/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">renew(conn, refresh_token)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento_web/plugs/jwt_auth_plug.ex#L63" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -437,12 +287,241 @@ will be called.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> renew(<a href="https://hexdocs.pm/plug/1.15.3/Plug.Conn.html#t:t/0">Plug.Conn.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: {:ok, <a href="https://hexdocs.pm/plug/1.15.3/Plug.Conn.html#t:t/0">Plug.Conn.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre translate="no"><span class="attribute">@type</span> t() :: %Trento.Databases.Events.DatabaseInstanceDeregistered{
+  database_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  deregistered_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  host_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  instance_number: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  version: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+}</pre>
 
       </div>
 
-<p>Creates new tokens using the refresh token.</p><p>The refresh token should be verified and valid, a new access token will be issued
-with the same validity as other access tokens, for the sub of the refresh token.</p>
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+      </a>
+      <span class="text">Functions</span>
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="cast_and_validate_required_embed/3">
+
+  <div class="detail-header">
+    <a href="#cast_and_validate_required_embed/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast_and_validate_required_embed(changeset, field, required_fields)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="cast_and_validate_required_polymorphic_embed/3">
+
+  <div class="detail-header">
+    <a href="#cast_and_validate_required_polymorphic_embed/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast_and_validate_required_polymorphic_embed(changeset, field, required_fields)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="changeset/2">
+
+  <div class="detail-header">
+    <a href="#changeset/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">changeset(struct, params)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Casts the fields by using Ecto reflection,
+validates the required ones and returns a changeset.</p>
+  </section>
+</section>
+<section class="detail" id="new/1">
+
+  <div class="detail-header">
+    <a href="#new/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">new(structs)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> new(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>() | [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()]) :: {:ok, <a href="#t:t/0">t</a>() | [<a href="#t:t/0">t</a>()]} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+<p>Returns an ok tuple if the params are valid, otherwise returns <code class="inline">{:error, {:validation, errors}}</code>.
+Accepts a map or a list of maps.</p>
+  </section>
+</section>
+<section class="detail" id="new!/1">
+
+  <div class="detail-header">
+    <a href="#new!/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">new!(params)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> new!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>() | [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()]) :: <a href="#t:t/0">t</a>() | [<a href="#t:t/0">t</a>()]</pre>
+
+      </div>
+
+<p>Returns new struct(s) if the params are valid, otherwise raises a <a href="https://hexdocs.pm/elixir/RuntimeError.html"><code class="inline">RuntimeError</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="supersede/1">
+
+  <div class="detail-header">
+    <a href="#supersede/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">supersede(params)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L9" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="upcast/2">
+
+  <div class="detail-header">
+    <a href="#upcast/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">upcast(params, metadata)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L9" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="upcast/3">
+
+  <div class="detail-header">
+    <a href="#upcast/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">upcast(params, _, int)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="validate_required_fields/2">
+
+  <div class="detail-header">
+    <a href="#validate_required_fields/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">validate_required_fields(changeset, required_fields)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/databases/events/database_instance_deregistered.ex#L6" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

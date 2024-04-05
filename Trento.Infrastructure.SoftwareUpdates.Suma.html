@@ -8,13 +8,13 @@
     <meta name="project" content="Trento Web v2.2.0">
 
 
-    <title>Trento.Hosts.Projections.HostTelemetryReadModel — Trento Web v2.2.0</title>
+    <title>Trento.Infrastructure.SoftwareUpdates.Suma — Trento Web v2.2.0</title>
     <link rel="stylesheet" href="dist/html-elixir-FM2CSD74.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-43PMFBC7.js"></script>
-    <script src="dist/sidebar_items-9534B7AE.js"></script>
+    <script src="dist/sidebar_items-663C31E0.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -131,19 +131,19 @@ GUIDES
 
 <h1>
 
-    <a href="https://github.com/trento-project/web/blob/main/lib/trento/hosts/projections/host_telemetry_read_model.ex#L1" title="View Source" class="icon-action" rel="help">
+    <a href="https://github.com/trento-project/web/blob/main/lib/trento/infrastructure/software_updates/suma.ex#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Trento.Hosts.Projections.HostTelemetryReadModel</span> 
+  <span translate="no">Trento.Infrastructure.SoftwareUpdates.Suma</span> 
   <small class="app-vsn" translate="no">(Trento Web v2.2.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>HostTelemetry read model</p>
+<p>SUMA Software updates discovery adapter</p>
   </section>
 
 
@@ -154,20 +154,6 @@ GUIDES
       </a>
       <span class="text">Summary</span>
     </h1>
-<div class="summary-types summary">
-  <h2>
-    <a href="#types">Types</a>
-  </h2>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#t:t/0" translate="no">t()</a>
-
-      </div>
-
-    </div>
-
-</div>
 <div class="summary-functions summary">
   <h2>
     <a href="#functions">Functions</a>
@@ -175,7 +161,25 @@ GUIDES
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#changeset/2" translate="no">changeset(host_telemetry, attrs)</a>
+        <a href="#child_spec/1" translate="no">child_spec(init_arg)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#identify/1" translate="no">identify(server_name \\ &quot;suma&quot;)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#start_link/1" translate="no">start_link(server_name)</a>
 
       </div>
 
@@ -185,58 +189,6 @@ GUIDES
 
   </section>
 
-
-  <section id="types" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#types">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Types</span>
-    </h1>
-    <div class="types-list">
-<section class="detail" id="t:t/0">
-
-  <div class="detail-header">
-    <a href="#t:t/0" class="detail-link" title="Link to this type">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
-    </a>
-    <h1 class="signature" translate="no">t()</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/hosts/projections/host_telemetry_read_model.ex#L12" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@type</span> t() :: %Trento.Hosts.Projections.HostTelemetryReadModel{
-  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  agent_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  cpu_count: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  hostname: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  installation_source: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  provider: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  sles_version: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  socket_count: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  total_memory_mb: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
-}</pre>
-
-      </div>
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -246,16 +198,16 @@ GUIDES
       <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
-<section class="detail" id="changeset/2">
+<section class="detail" id="child_spec/1">
 
   <div class="detail-header">
-    <a href="#changeset/2" class="detail-link" title="Link to this function">
+    <a href="#child_spec/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">changeset(host_telemetry, attrs)</h1>
+    <h1 class="signature" translate="no">child_spec(init_arg)</h1>
 
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/hosts/projections/host_telemetry_read_model.ex#L34" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/infrastructure/software_updates/suma.ex#L8" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -265,11 +217,51 @@ GUIDES
 
   <section class="docstring">
 
-      <div class="specs">
+<p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://hexdocs.pm/elixir/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="identify/1">
 
-          <pre translate="no"><span class="attribute">@spec</span> changeset(<a href="#t:t/0">t</a>() | <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+    <span id="identify/0"></span>
 
-      </div>
+  <div class="detail-header">
+    <a href="#identify/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">identify(server_name \\ &quot;suma&quot;)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/infrastructure/software_updates/suma.ex#L26" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="start_link/1">
+
+  <div class="detail-header">
+    <a href="#start_link/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">start_link(server_name)</h1>
+
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/infrastructure/software_updates/suma.ex#L18" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
 
 
   </section>

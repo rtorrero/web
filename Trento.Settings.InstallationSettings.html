@@ -8,13 +8,13 @@
     <meta name="project" content="Trento Web v2.2.0">
 
 
-    <title>Trento.SapSystems.Commands.RegisterDatabaseInstance — Trento Web v2.2.0</title>
+    <title>Trento.Settings.InstallationSettings — Trento Web v2.2.0</title>
     <link rel="stylesheet" href="dist/html-elixir-FM2CSD74.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-43PMFBC7.js"></script>
-    <script src="dist/sidebar_items-9534B7AE.js"></script>
+    <script src="dist/sidebar_items-663C31E0.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -131,19 +131,19 @@ GUIDES
 
 <h1>
 
-    <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L1" title="View Source" class="icon-action" rel="help">
+    <a href="https://github.com/trento-project/web/blob/main/lib/trento/settings/installation_settings.ex#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Trento.SapSystems.Commands.RegisterDatabaseInstance</span> 
+  <span translate="no">Trento.Settings.InstallationSettings</span> 
   <small class="app-vsn" translate="no">(Trento Web v2.2.0)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Register a database instance to the monitoring system.</p>
+<p>InstallationSettings is the STI projection containing installation related settings</p>
   </section>
 
 
@@ -175,7 +175,17 @@ GUIDES
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#cast_and_validate_required_embed/3" translate="no">cast_and_validate_required_embed(changeset, field, required_fields)</a>
+        <a href="#base_query/0" translate="no">base_query()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>base_query returns the complete content of the inherited table with the provided identifier</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#changeset/2" translate="no">changeset(system_settings, attrs)</a>
 
       </div>
 
@@ -183,7 +193,7 @@ GUIDES
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#cast_and_validate_required_polymorphic_embed/3" translate="no">cast_and_validate_required_polymorphic_embed(changeset, field, required_fields)</a>
+        <a href="#sti_changes/1" translate="no">sti_changes(changeset)</a>
 
       </div>
 
@@ -191,39 +201,7 @@ GUIDES
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#changeset/2" translate="no">changeset(struct, params)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Casts the fields by using Ecto reflection,
-validates the required ones and returns a changeset.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#new/1" translate="no">new(structs)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Returns an ok tuple if the params are valid, otherwise returns <code class="inline">{:error, {:validation, errors}}</code>.
-Accepts a map or a list of maps.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#new!/1" translate="no">new!(params)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Returns new struct(s) if the params are valid, otherwise raises a <a href="https://hexdocs.pm/elixir/RuntimeError.html"><code class="inline">RuntimeError</code></a>.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#validate_required_fields/2" translate="no">validate_required_fields(changeset, required_fields)</a>
+        <a href="#sti_column_value/0" translate="no">sti_column_value()</a>
 
       </div>
 
@@ -251,7 +229,7 @@ Accepts a map or a list of maps.</p></div>
     </a>
     <h1 class="signature" translate="no">t()</h1>
 
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L18" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/settings/installation_settings.ex#L11" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -263,20 +241,14 @@ Accepts a map or a list of maps.</p></div>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@type</span> t() :: %Trento.SapSystems.Commands.RegisterDatabaseInstance{
-  features: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  health: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  host_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  http_port: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  https_port: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  instance_hostname: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  instance_number: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  sap_system_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  sid: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  start_priority: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  system_replication: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  system_replication_status: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
-  tenant: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+          <pre translate="no"><span class="attribute">@type</span> t() :: %Trento.Settings.InstallationSettings{
+  __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  eula_accepted: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  inserted_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  installation_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+  updated_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
 }</pre>
 
       </div>
@@ -296,16 +268,16 @@ Accepts a map or a list of maps.</p></div>
       <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
-<section class="detail" id="cast_and_validate_required_embed/3">
+<section class="detail" id="base_query/0">
 
   <div class="detail-header">
-    <a href="#cast_and_validate_required_embed/3" class="detail-link" title="Link to this function">
+    <a href="#base_query/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">cast_and_validate_required_embed(changeset, field, required_fields)</h1>
+    <h1 class="signature" translate="no">base_query()</h1>
 
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L18" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/settings/installation_settings.ex#L7" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -315,29 +287,7 @@ Accepts a map or a list of maps.</p></div>
 
   <section class="docstring">
 
-
-  </section>
-</section>
-<section class="detail" id="cast_and_validate_required_polymorphic_embed/3">
-
-  <div class="detail-header">
-    <a href="#cast_and_validate_required_polymorphic_embed/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">cast_and_validate_required_polymorphic_embed(changeset, field, required_fields)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L18" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>base_query returns the complete content of the inherited table with the provided identifier</p>
   </section>
 </section>
 <section class="detail" id="changeset/2">
@@ -347,32 +297,9 @@ Accepts a map or a list of maps.</p></div>
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">changeset(struct, params)</h1>
+    <h1 class="signature" translate="no">changeset(system_settings, attrs)</h1>
 
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L18" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Casts the fields by using Ecto reflection,
-validates the required ones and returns a changeset.</p>
-  </section>
-</section>
-<section class="detail" id="new/1">
-
-  <div class="detail-header">
-    <a href="#new/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">new(structs)</h1>
-
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L18" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/settings/installation_settings.ex#L24" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -384,24 +311,23 @@ validates the required ones and returns a changeset.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> new(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>() | [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()]) :: {:ok, <a href="#t:t/0">t</a>() | [<a href="#t:t/0">t</a>()]} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> changeset(<a href="#t:t/0">t</a>() | <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
 
       </div>
 
-<p>Returns an ok tuple if the params are valid, otherwise returns <code class="inline">{:error, {:validation, errors}}</code>.
-Accepts a map or a list of maps.</p>
+
   </section>
 </section>
-<section class="detail" id="new!/1">
+<section class="detail" id="sti_changes/1">
 
   <div class="detail-header">
-    <a href="#new!/1" class="detail-link" title="Link to this function">
+    <a href="#sti_changes/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">new!(params)</h1>
+    <h1 class="signature" translate="no">sti_changes(changeset)</h1>
 
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L18" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/settings/installation_settings.ex#L7" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -411,25 +337,19 @@ Accepts a map or a list of maps.</p>
 
   <section class="docstring">
 
-      <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> new!(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>() | [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()]) :: <a href="#t:t/0">t</a>() | [<a href="#t:t/0">t</a>()]</pre>
-
-      </div>
-
-<p>Returns new struct(s) if the params are valid, otherwise raises a <a href="https://hexdocs.pm/elixir/RuntimeError.html"><code class="inline">RuntimeError</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="validate_required_fields/2">
+<section class="detail" id="sti_column_value/0">
 
   <div class="detail-header">
-    <a href="#validate_required_fields/2" class="detail-link" title="Link to this function">
+    <a href="#sti_column_value/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">validate_required_fields(changeset, required_fields)</h1>
+    <h1 class="signature" translate="no">sti_column_value()</h1>
 
-      <a href="https://github.com/trento-project/web/blob/main/lib/trento/sap_systems/commands/register_database_instance.ex#L18" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/trento-project/web/blob/main/lib/trento/settings/installation_settings.ex#L7" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
