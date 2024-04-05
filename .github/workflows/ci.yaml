@@ -486,18 +486,12 @@ jobs:
             test/e2e/node_modules
           key: ${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('test/e2e/package-lock.json') }}
       - name: Check Eslint and JS Code Format
-        run: cd test/e2e && npm run lint && npm run format:check    
+        run: cd test/e2e && npm run lint && npm run format:check
       - name: Docker compose dependencies
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: "./docker-compose.yaml"
+          compose-file: "./docker-compose.regression.yaml"
           down-flags: "--volumes"
-      - name: Import postgres snapshots
-        run: |
-          createdb -h localhost -p 5673 -U postgres trento_regression_test
-          createdb -h localhost -p 5673 -U postgres trento_eventstore_regression_test
-          pg_restore -h localhost -p 5673 -U postgres -d trento_regression_test -c -1 ./trento_dev.dump
-          pg_restore -h localhost -p 5673 -U postgres -d trento_eventstore_regression_test -c -1 ./trento_eventstore_dev.dump
       - name: Mix setup
         run: mix setup
       - name: Run trento detached
