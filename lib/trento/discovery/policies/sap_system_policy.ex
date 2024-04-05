@@ -5,16 +5,19 @@ defmodule Trento.Discovery.Policies.SapSystemPolicy do
 
   require Trento.SapSystems.Enums.EnsaVersion, as: EnsaVersion
 
-  alias Trento.SapSystems.Commands.{
-    DeregisterApplicationInstance,
-    DeregisterDatabaseInstance,
-    MarkApplicationInstanceAbsent,
+  alias Trento.Databases.Commands.{
     MarkDatabaseInstanceAbsent,
-    RegisterApplicationInstance,
     RegisterDatabaseInstance
   }
 
-  alias Trento.SapSystems.Projections.{ApplicationInstanceReadModel, DatabaseInstanceReadModel}
+  alias Trento.SapSystems.Commands.{
+    MarkApplicationInstanceAbsent,
+    RegisterApplicationInstance
+  }
+
+  alias Trento.Databases.Projections.DatabaseInstanceReadModel
+
+  alias Trento.SapSystems.Projections.ApplicationInstanceReadModel
 
   alias Trento.Discovery.Payloads.SapSystemDiscoveryPayload
 
@@ -39,9 +42,7 @@ defmodule Trento.Discovery.Policies.SapSystemPolicy do
         ) ::
           {:ok,
            [
-             DeregisterApplicationInstance.t()
-             | DeregisterDatabaseInstance.t()
-             | RegisterApplicationInstance.t()
+             RegisterApplicationInstance.t()
              | RegisterDatabaseInstance.t()
            ]}
           | {:error, any}
@@ -97,7 +98,7 @@ defmodule Trento.Discovery.Policies.SapSystemPolicy do
     Enum.flat_map(databases, fn %{:Database => tenant} ->
       Enum.map(instances, fn instance ->
         RegisterDatabaseInstance.new(%{
-          sap_system_id: UUID.uuid5(@uuid_namespace, id),
+          database_id: UUID.uuid5(@uuid_namespace, id),
           sid: sid,
           tenant: tenant,
           host_id: host_id,
@@ -171,7 +172,7 @@ defmodule Trento.Discovery.Policies.SapSystemPolicy do
         MarkDatabaseInstanceAbsent.new!(%{
           host_id: instance.host_id,
           instance_number: instance.instance_number,
-          sap_system_id: instance.sap_system_id,
+          database_id: instance.database_id,
           absent_at: DateTime.utc_now()
         })
     end)

@@ -42,16 +42,20 @@ defmodule Trento.Factory do
     SoftwareUpdatesDiscoveryCompleted
   }
 
-  alias Trento.SapSystems.Events.{
-    ApplicationInstanceDeregistered,
-    ApplicationInstanceMarkedAbsent,
-    ApplicationInstanceRegistered,
+  alias Trento.Databases.Events.{
     DatabaseDeregistered,
     DatabaseInstanceDeregistered,
     DatabaseInstanceMarkedAbsent,
     DatabaseInstanceRegistered,
     DatabaseRegistered,
     DatabaseRestored,
+    DatabaseTombstoned
+  }
+
+  alias Trento.SapSystems.Events.{
+    ApplicationInstanceDeregistered,
+    ApplicationInstanceMarkedAbsent,
+    ApplicationInstanceRegistered,
     SapSystemDeregistered,
     SapSystemRegistered,
     SapSystemTombstoned
@@ -69,10 +73,13 @@ defmodule Trento.Factory do
 
   alias Trento.SapSystems.Commands.{
     DeregisterApplicationInstance,
-    DeregisterDatabaseInstance,
     RegisterApplicationInstance,
-    RegisterDatabaseInstance,
     RollUpSapSystem
+  }
+
+  alias Trento.Databases.Commands.{
+    DeregisterDatabaseInstance,
+    RegisterDatabaseInstance
   }
 
   alias Trento.Clusters.Commands.RegisterClusterHost
@@ -82,10 +89,13 @@ defmodule Trento.Factory do
     SlesSubscriptionReadModel
   }
 
+  alias Trento.Databases.Projections.{
+    DatabaseInstanceReadModel,
+    DatabaseReadModel
+  }
+
   alias Trento.SapSystems.Projections.{
     ApplicationInstanceReadModel,
-    DatabaseInstanceReadModel,
-    DatabaseReadModel,
     SapSystemReadModel
   }
 
@@ -289,7 +299,7 @@ defmodule Trento.Factory do
 
   def database_instance_registered_event_factory do
     %DatabaseInstanceRegistered{
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       sid: Faker.UUID.v4(),
       tenant: Faker.UUID.v4(),
       instance_number: "00",
@@ -309,7 +319,7 @@ defmodule Trento.Factory do
     DatabaseInstanceMarkedAbsent.new!(%{
       instance_number: "00",
       host_id: Faker.UUID.v4(),
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       absent_at: DateTime.utc_now()
     })
   end
@@ -318,21 +328,21 @@ defmodule Trento.Factory do
     DatabaseInstanceDeregistered.new!(%{
       instance_number: "00",
       host_id: Faker.UUID.v4(),
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       deregistered_at: DateTime.utc_now()
     })
   end
 
   def database_restored_event_factory do
     DatabaseRestored.new!(%{
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       health: Health.passing()
     })
   end
 
   def deregister_database_instance_command_factory do
     DeregisterDatabaseInstance.new!(%{
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       deregistered_at: DateTime.utc_now(),
       host_id: Faker.UUID.v4(),
       instance_number: "00"
@@ -341,7 +351,7 @@ defmodule Trento.Factory do
 
   def database_deregistered_event_factory do
     DatabaseDeregistered.new!(%{
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       deregistered_at: DateTime.utc_now()
     })
   end
@@ -390,7 +400,7 @@ defmodule Trento.Factory do
 
   def database_registered_event_factory do
     %DatabaseRegistered{
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       sid: Faker.UUID.v4(),
       health: Health.passing()
     }
@@ -525,7 +535,8 @@ defmodule Trento.Factory do
   def database_factory do
     %DatabaseReadModel{
       id: Faker.UUID.v4(),
-      sid: Faker.StarWars.planet()
+      sid: Faker.StarWars.planet(),
+      health: Health.unknown()
     }
   end
 
@@ -537,13 +548,14 @@ defmodule Trento.Factory do
       db_host: Faker.Internet.ip_v4_address(),
       health: Health.unknown(),
       ensa_version: EnsaVersion.ensa1(),
-      deregistered_at: nil
+      deregistered_at: nil,
+      database_id: Faker.UUID.v4()
     }
   end
 
   def database_instance_without_host_factory do
     %DatabaseInstanceReadModel{
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       sid: Faker.UUID.v4(),
       tenant: Faker.UUID.v4(),
       instance_number: "00",
@@ -627,13 +639,14 @@ defmodule Trento.Factory do
       start_priority: "0.3",
       host_id: Faker.UUID.v4(),
       health: Health.passing(),
-      ensa_version: EnsaVersion.ensa1()
+      ensa_version: EnsaVersion.ensa1(),
+      database_id: Faker.UUID.v4()
     })
   end
 
   def register_database_instance_command_factory do
     RegisterDatabaseInstance.new!(%{
-      sap_system_id: Faker.UUID.v4(),
+      database_id: Faker.UUID.v4(),
       sid: Faker.StarWars.planet(),
       tenant: Faker.Beer.hop(),
       instance_number: "00",
@@ -700,6 +713,12 @@ defmodule Trento.Factory do
   def sap_system_tombstoned_event_factory do
     SapSystemTombstoned.new!(%{
       sap_system_id: Faker.UUID.v4()
+    })
+  end
+
+  def database_tombstoned_event_factory do
+    DatabaseTombstoned.new!(%{
+      database_id: Faker.UUID.v4()
     })
   end
 

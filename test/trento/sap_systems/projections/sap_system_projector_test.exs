@@ -300,11 +300,13 @@ defmodule Trento.SapSystems.Projections.SapSystemProjectorTest do
   end
 
   test "should restore a SAP system when SapSystemRestored is received" do
+    %{id: database_id} = insert(:database)
+
     %{tenant: tenant, id: sap_system_id, sid: sid} =
-      insert(:sap_system, deregistered_at: DateTime.utc_now())
+      insert(:sap_system, deregistered_at: DateTime.utc_now(), database_id: database_id)
 
     database_instance =
-      insert(:database_instance_without_host, sap_system_id: sap_system_id)
+      insert(:database_instance_without_host, database_id: database_id)
       |> Map.from_struct()
       |> Map.delete(:__meta__)
       |> Map.delete(:host)
@@ -335,6 +337,9 @@ defmodule Trento.SapSystems.Projections.SapSystemProjectorTest do
       |> Repo.get(sap_system_id)
       |> Repo.preload([:tags])
 
+    adapted_database_instance =
+      Map.put(database_instance, :sap_system_id, database_id)
+
     assert_broadcast(
       "sap_system_restored",
       %{
@@ -343,7 +348,7 @@ defmodule Trento.SapSystems.Projections.SapSystemProjectorTest do
         id: ^sap_system_id,
         sid: ^sid,
         tenant: ^tenant,
-        database_instances: [^database_instance],
+        database_instances: [^adapted_database_instance],
         application_instances: [^application_instance],
         tags: ^tags
       },

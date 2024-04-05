@@ -38,7 +38,8 @@ defmodule Trento.SapSystems.Projections.SapSystemProjector do
       tenant: tenant,
       db_host: db_host,
       health: health,
-      ensa_version: ensa_version
+      ensa_version: ensa_version,
+      database_id: database_id
     },
     fn multi ->
       changeset =
@@ -48,7 +49,8 @@ defmodule Trento.SapSystems.Projections.SapSystemProjector do
           tenant: tenant,
           db_host: db_host,
           health: health,
-          ensa_version: ensa_version
+          ensa_version: ensa_version,
+          database_id: database_id
         })
 
       Ecto.Multi.insert(multi, :sap_system, changeset)
@@ -409,7 +411,7 @@ defmodule Trento.SapSystems.Projections.SapSystemProjector do
     TrentoWeb.Endpoint.broadcast(
       @sap_systems_topic,
       "application_instance_absent_at_changed",
-      SapSystemView.render("instance_absent_at_changed.json",
+      SapSystemView.render("application_instance_absent_at_changed.json",
         instance: %{
           instance_number: instance_number,
           host_id: host_id,
@@ -434,7 +436,7 @@ defmodule Trento.SapSystems.Projections.SapSystemProjector do
     TrentoWeb.Endpoint.broadcast(
       @sap_systems_topic,
       "application_instance_absent_at_changed",
-      SapSystemView.render("instance_absent_at_changed.json",
+      SapSystemView.render("application_instance_absent_at_changed.json",
         instance: %{
           instance_number: instance_number,
           host_id: host_id,
@@ -461,7 +463,7 @@ defmodule Trento.SapSystems.Projections.SapSystemProjector do
     TrentoWeb.Endpoint.broadcast(
       @sap_systems_topic,
       "application_instance_deregistered",
-      SapSystemView.render("instance_deregistered.json",
+      SapSystemView.render("application_instance_deregistered.json",
         sap_system_id: sap_system_id,
         instance_number: instance_number,
         host_id: host_id,
