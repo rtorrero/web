@@ -407,6 +407,8 @@ jobs:
     steps:
       - name: Pwd
         run: echo  $(pwd)
+      - name: Ls
+        run: echo $(ls)
       - name: Docker compose dependencies
         uses: isbang/compose-action@v1.5.1
         with:
