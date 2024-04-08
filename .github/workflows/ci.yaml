@@ -358,7 +358,7 @@ jobs:
           - name: End to end tests
             docker_compose_file: docker-compose.yaml
           - name: Regression tests
-            docker_compose_file: docker-compose.regression.yaml
+            docker_compose_file: docker-compose.yaml
     env:
       MIX_ENV: dev
     steps:
