@@ -507,7 +507,7 @@ jobs:
       - name: Mix setup
         run: mix setup
       - name: Restore DB
-        run: hack/restore_databases.sh
+        run: sudo -u postgres hack/restore_databases.sh
       - name: Run trento detached
         run: mix phx.server &
       - name: Install photofinish
