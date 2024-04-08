@@ -357,10 +357,8 @@ jobs:
         include:
           - name: End to end tests
             docker_compose_file: docker-compose.yaml
-            base_url: http://localhost:4000
           - name: Regression tests
             docker_compose_file: docker-compose.regression.yaml
-            base_url: http://localhost:4010
     env:
       MIX_ENV: dev
     steps:
@@ -437,7 +435,7 @@ jobs:
         with:
           working-directory: test/e2e
           wait-on-timeout: 30
-          config: baseUrl=${{ matrix.base_url }}
+          config: baseUrl=http://localhost:4000
       - name: Upload cypress test screenshots
         uses: actions/upload-artifact@v4
         if: failure()
