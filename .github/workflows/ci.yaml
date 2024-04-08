@@ -349,16 +349,9 @@ jobs:
         run: cd test/e2e && npm install
 
   test-e2e:
-    name: ${{ matrix.name }}
+    name: End to end tests
     needs: [elixir-deps, npm-deps, npm-e2e-deps, api-bc-check]
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        include:
-          - name: End to end tests
-            docker_compose_file: docker-compose.yaml
-          - name: Regression tests
-            docker_compose_file: docker-compose.yaml
     env:
       MIX_ENV: dev
     steps:
@@ -406,10 +399,10 @@ jobs:
           key: ${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('test/e2e/package-lock.json') }}
       - name: Check Eslint and JS Code Format
         run: cd test/e2e && npm run lint && npm run format:check
-      - name: Docker compose dependencies
+      - name: "Docker compose dependencies"
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: "./${{ matrix.docker_compose_file }}"
+          compose-file: "./docker-compose.yaml"
           down-flags: "--volumes"
       - name: Mix setup
         run: mix setup
