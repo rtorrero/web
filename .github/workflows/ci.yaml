@@ -507,7 +507,7 @@ jobs:
       - name: Mix setup
         run: mix setup
       - name: Restore DB
-        run: hack/restore_databases.sh
+        run: docker exec -i web-postgres-1 bash -c "$(cat hack/restore_databases.sh)"
       - name: Run trento detached
         run: mix phx.server &
       - name: Install photofinish
