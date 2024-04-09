@@ -508,6 +508,8 @@ jobs:
         run: mix setup
       - name: Restore DB
         run: docker exec -i web-postgres-1 bash -c "$(cat hack/restore_databases.sh)"
+      - name: Run DB migrations
+        run: mix ecto.migrate
       - name: Run trento detached
         run: mix phx.server &
       - name: Install photofinish
