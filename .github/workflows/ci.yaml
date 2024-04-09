@@ -502,8 +502,9 @@ jobs:
       - name: "Docker compose dependencies"
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: "./docker-compose.regression.yaml"
+          compose-file: "./docker-compose.yaml"
           down-flags: "--volumes"
+          compose-flags: "-f docker-compose.regression.yaml"
       - name: Mix setup
         run: mix setup
       - name: Restore DB
