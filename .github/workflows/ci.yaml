@@ -454,6 +454,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       MIX_ENV: dev
+      PGPASSWORD: postgres
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.12.1
@@ -502,8 +503,10 @@ jobs:
         with:
           compose-file: "./docker-compose.yaml"
           down-flags: "--volumes"
-      - name: Mix setup
-        run: mix setup
+      - name: Create empty databases
+        run: |
+          createdb -U postgres trento_dev
+          createdb -U postgres trento_eventstore_dev
       - name: Postgres trento_dev restore
         uses: tj-actions/pg-restore@v6
         with:
