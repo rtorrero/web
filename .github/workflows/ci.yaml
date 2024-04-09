@@ -507,12 +507,12 @@ jobs:
       - name: Postgres trento_dev restore
         uses: tj-actions/pg-restore@v6
         with:
-          database_url: "postgresql://postgres:postgres@localhost:5432/trento_dev"
+          database_url: "postgresql://postgres:postgres@localhost:5433/trento_dev"
           backup_file: "test/fixtures/regression/sap_system_split/trento_dev.sql"
       - name: Postgres trento_eventstore_dev restore
         uses: tj-actions/pg-restore@v6
         with:
-          database_url: "postgresql://postgres:postgres@localhost:5432/trento_eventstore_dev"
+          database_url: "postgresql://postgres:postgres@localhost:5433/trento_eventstore_dev"
           backup_file: "test/fixtures/regression/sap_system_split/trento_eventstore_dev.sql"
       - name: Run DB migrations
         run: mix ecto.migrate
