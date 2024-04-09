@@ -24,7 +24,7 @@ PG_ES_DB_URL=postgresql://postgres:postgres@localhost:5433/trento_eventstore_dev
 # pg_restore -h localhost -p 5433 -U postgres -d trento_dev -c -1 /dumps/trento_dev.dump
 # pg_restore -h localhost -p 5433 -U postgres -d trento_eventstore_dev -c -1 /dumps/trento_eventstore_dev.dump
 
-pg_restore -d $PG_DB_URL -c -1 test/fixtures/regression/sap_system_split/trento_dev.dump
-pg_restore -d $PG_ES_DB_URL -c -1 test/fixtures/regression/sap_system_split/trento_dev.dump
+pg_restore -d $PG_DB_URL -c -1 /dumps/trento_dev.dump
+pg_restore -d $PG_ES_DB_URL -c -1 /dumps/trento_eventstore_dev.dump
 
 echo "Database restoration complete."
