@@ -5,8 +5,8 @@
 # to do regression tests. This events will be upcasted to their equivalents in the current version
 # by Trento.
 
-PG_DB_URL=postgresql://postgres:postgres@localhost:5433/trento_dev
-PG_ES_DB_URL=postgresql://postgres:postgres@localhost:5433/trento_eventstore_dev
+PG_DB_URL=postgresql://postgres:postgres@localhost:5432/trento_dev
+PG_ES_DB_URL=postgresql://postgres:postgres@localhost:5432/trento_eventstore_dev
 
 # Wait for PostgreSQL to become available
 # echo "Waiting for PostgreSQL to start..."
