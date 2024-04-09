@@ -451,7 +451,7 @@ jobs:
   regression-test-e2e:
     name: Regression tests
     needs: [elixir-deps, npm-deps, npm-e2e-deps, api-bc-check]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       MIX_ENV: dev
     steps:
