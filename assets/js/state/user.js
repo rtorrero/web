@@ -4,8 +4,11 @@ import { createAction, createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   loggedIn: false,
   username: undefined,
+  fullname: undefined,
   email: undefined,
   id: undefined,
+  createdAt: undefined,
+  updatedAt: undefined,
   authError: null,
   authInProgress: false,
 };
@@ -34,9 +37,9 @@ export const userSlice = createSlice({
       state.username = username;
       state.email = email;
       state.id = id;
-      state.created_at = created_at;
+      state.createdAt = created_at;
       state.fullname = fullname;
-      state.updated_at = updated_at;
+      state.updatedAt = updated_at;
     },
   },
 });
