@@ -1,4 +1,6 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { select, put, takeEvery } from 'redux-saga/effects';
+import { selectPreviousLocation } from '@state/locationSlice';
+import { useNavigate } from 'react-router-dom';
 
 import { notify } from '@state/notifications';
 import {
@@ -34,6 +36,19 @@ function* clusterDetailsUpdated({ payload }) {
 }
 
 export function* clusterDeregistered({ payload: { name, id } }) {
+  const previousLocation = yield select(selectPreviousLocation);
+  const navigate = useNavigate();
+  console.log('Previous location is: ', previousLocation);
+
+  console.log('Cluster is: ', id);
+  switch (previousLocation.pathname) {
+    case `/clusters/${id}`:
+      console.log('Avoid redirecting to 404');
+      navigate('/clusters');
+      break;
+    default:
+      console.log('NO MATCH: ', location.pathname);
+  }
   yield put(removeCluster({ id }));
   yield put(
     notify({

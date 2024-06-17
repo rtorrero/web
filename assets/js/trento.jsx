@@ -31,6 +31,8 @@ import SaptuneDetailsPage from '@pages/SaptuneDetails';
 import SettingsPage from '@pages/SettingsPage';
 import SomethingWentWrong from '@pages/SomethingWentWrong';
 
+import LocationListener from '@common/LocationListener';
+
 import { me } from '@lib/auth';
 import { networkClient } from '@lib/network';
 import { TARGET_CLUSTER, TARGET_HOST } from '@lib/model';
@@ -50,6 +52,7 @@ function App() {
             store.dispatch({ type: 'RESET_STATE' });
           }}
         >
+          <LocationListener />
           <Routes>
             <Route path="/session/new" element={<Login />} />
             <Route path="/">

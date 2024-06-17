@@ -14,6 +14,7 @@ import settingsReducer from './settings';
 import userReducer from './user';
 import softwareUpdatesReducer from './softwareUpdates';
 import softwareUpdatesSettingsReducer from './softwareUpdatesSettings';
+import locationReducer from './locationSlice';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -33,6 +34,7 @@ export const store = configureStore({
     user: userReducer,
     softwareUpdates: softwareUpdatesReducer,
     softwareUpdatesSettings: softwareUpdatesSettingsReducer,
+    location: locationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

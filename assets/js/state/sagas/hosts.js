@@ -1,4 +1,12 @@
-import { delay, put, race, call, take, takeEvery } from 'redux-saga/effects';
+import {
+  select,
+  delay,
+  put,
+  race,
+  call,
+  take,
+  takeEvery,
+} from 'redux-saga/effects';
 import { del } from '@lib/network';
 
 import {
@@ -29,6 +37,8 @@ import {
   checkHostIsDeregisterable,
   cancelCheckHostIsDeregisterable,
 } from '@state/hosts';
+
+// import { selectLocation } from '@state/locationSlice';
 
 import { fetchSoftwareUpdatesSettings } from '@state/softwareUpdatesSettings';
 import { fetchSoftwareUpdates } from '@state/softwareUpdates';
@@ -116,7 +126,6 @@ export function* deregisterHost({
   yield put(setHostDeregistering(payload));
   try {
     yield call(del, `/hosts/${id}`);
-    navigate('/hosts');
   } catch (error) {
     yield put(
       notify({
